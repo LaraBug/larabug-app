@@ -1,0 +1,56 @@
+@import "https://fonts.googleapis.com/css?family=Rubik:400,500&display=swap";
+
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
+@import '../plugins/prism_theme';
+
+@import '../plugins/fontawesome/fontawesome';
+@import '../plugins/fontawesome/duotone';
+@import '../plugins/fontawesome/brands';
+@import '../plugins/fontawesome/solid';
+@import '../plugins/fontawesome/regular';
+
+
+.markdown {
+  h1 {
+    @apply my-8 text-3xl font-medium leading-tight;
+  }
+
+  h2 {
+    @apply my-4 text-2xl font-medium leading-tight;
+  }
+
+  p {
+    @apply my-5 leading-relaxed;
+  }
+
+  img {
+    @apply inline-block m-1;
+  }
+
+  code:not([class*="language-"]) {
+    @apply p-2 bg-gray-200 rounded border border-gray-400 mb-2 shadow-lg inline-block w-full;
+  }
+
+  a {
+    @apply text-primary-500;
+
+    &:hover{
+      @apply text-primary-700;
+    }
+  }
+}
+
+@media (min-width: 72rem) {
+  .transform-feature-l {
+    transform: scale(1.05) perspective(1920px) rotateY(12deg) rotateX(4deg) rotate(-2deg);
+  }
+
+  .transform-feature-r {
+    transform: scale(1.05) perspective(1920px) rotateY(-12deg) rotateX(4deg) rotate(2deg);
+  }
+}

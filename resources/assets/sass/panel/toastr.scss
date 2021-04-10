@@ -1,0 +1,12 @@
+$vt-color-error: theme('colors.red.500');
+$vt-color-info: theme('colors.blue.500');
+$vt-color-success: theme('colors.green.500');
+$vt-font-family: theme('fontFamily.sans');
+
+@import "~vue-toastification/src/scss/_variables";
+@import "~vue-toastification/src/scss/_toastContainer";
+@import "~vue-toastification/src/scss/_toast";
+@import "~vue-toastification/src/scss/_closeButton";
+@import "~vue-toastification/src/scss/_progressBar";
+@import "~vue-toastification/src/scss/_icon";
+@import "~vue-toastification/src/scss/animations/_fade";

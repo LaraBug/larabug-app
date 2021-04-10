@@ -1,0 +1,28 @@
+/* Reset */
+@tailwind base;
+
+@tailwind components;
+
+/* Utilities */
+@tailwind utilities;
+
+@import '../plugins/prism_theme';
+@import "~vue-toastification/dist/index.css";
+
+pre:not([class*='language-']){
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  font-size: 1em;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+  margin: .5em 0;
+  overflow: auto;
+
+  @apply leading-relaxed text-gray-600 p-5 border border-gray-200 bg-white rounded shadow-sm mb-5;
+}
