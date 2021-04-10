@@ -361,7 +361,8 @@ __webpack_require__.r(__webpack_exports__);
         description: null,
         receive_email: false,
         slack_webhook: null,
-        discord_webhook: null
+        discord_webhook: null,
+        custom_webhook: null
       }
     };
   },
@@ -2379,11 +2380,18 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
               error: _ctx.$page.props.errors.discord_webhook,
               label: "Discord Webhook URL",
               id: "discord_webhook_url"
+            }, null, 8 /* PROPS */, ["modelValue", "error"]),
+            (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_FormInputGroup, {
+              modelValue: $data.form.custom_webhook,
+              "onUpdate:modelValue": _cache[5] || (_cache[5] = $event => ($data.form.custom_webhook = $event)),
+              error: _ctx.$page.props.errors.custom_webhook,
+              label: "Custom Webhook URL",
+              id: "custom_webhook_url"
             }, null, 8 /* PROPS */, ["modelValue", "error"])
           ]),
           (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_FormTextareaGroup, {
             modelValue: $data.form.description,
-            "onUpdate:modelValue": _cache[5] || (_cache[5] = $event => ($data.form.description = $event)),
+            "onUpdate:modelValue": _cache[6] || (_cache[6] = $event => ($data.form.description = $event)),
             label: "Description",
             id: "description"
           }, null, 8 /* PROPS */, ["modelValue"])

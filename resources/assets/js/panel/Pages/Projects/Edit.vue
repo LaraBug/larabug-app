@@ -34,7 +34,14 @@
                             required
                     />
 
-                    <div class="flex items-center space-x-2">
+                    <FormInputGroup
+                            v-model="form.custom_webhook"
+                            label="Custom Webhook URL"
+                            id="custom_webhook_url"
+                            required
+                    />
+
+                    <div class="flex items-center space-x-2 col-span-2">
                         <input
                                 :class="[
         'form-checkbox text-primary-600',
@@ -103,6 +110,7 @@ export default {
                 receive_email: this.project.receive_email,
                 slack_webhook: this.project.slack_webhook,
                 discord_webhook: this.project.discord_webhook,
+                custom_webhook: this.project.custom_webhook,
             },
         }
     },

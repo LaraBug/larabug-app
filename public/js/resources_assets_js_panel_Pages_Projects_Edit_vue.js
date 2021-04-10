@@ -364,7 +364,8 @@ __webpack_require__.r(__webpack_exports__);
         description: this.project.description,
         receive_email: this.project.receive_email,
         slack_webhook: this.project.slack_webhook,
-        discord_webhook: this.project.discord_webhook
+        discord_webhook: this.project.discord_webhook,
+        custom_webhook: this.project.custom_webhook
       }
     };
   },
@@ -2290,7 +2291,7 @@ const _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVN
 const _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Edit")
 const _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", { class: "text-xl font-bold" }, "Edit project", -1 /* HOISTED */)
 const _hoisted_5 = { class: "grid grid-cols-2 gap-4" }
-const _hoisted_6 = { class: "flex items-center space-x-2" }
+const _hoisted_6 = { class: "flex items-center space-x-2 col-span-2" }
 const _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
   class: "text-sm font-medium",
   for: "receive_email"
@@ -2380,7 +2381,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       default: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(() => [
         (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("form", {
           class: "space-y-6",
-          onSubmit: _cache[7] || (_cache[7] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)((...args) => ($options.submit(...args)), ["prevent"]))
+          onSubmit: _cache[8] || (_cache[8] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)((...args) => ($options.submit(...args)), ["prevent"]))
         }, [
           (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_FormInputGroup, {
             modelValue: $data.form.title,
@@ -2413,6 +2414,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
               id: "discord_webhook_url",
               required: ""
             }, null, 8 /* PROPS */, ["modelValue"]),
+            (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_FormInputGroup, {
+              modelValue: $data.form.custom_webhook,
+              "onUpdate:modelValue": _cache[5] || (_cache[5] = $event => ($data.form.custom_webhook = $event)),
+              label: "Custom Webhook URL",
+              id: "custom_webhook_url",
+              required: ""
+            }, null, 8 /* PROPS */, ["modelValue"]),
             (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_6, [
               (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
                 class: [
@@ -2422,7 +2430,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       ],
                 id: "receive_email",
                 type: "checkbox",
-                "onUpdate:modelValue": _cache[5] || (_cache[5] = $event => ($data.form.receive_email = $event))
+                "onUpdate:modelValue": _cache[6] || (_cache[6] = $event => ($data.form.receive_email = $event))
               }, null, 512 /* NEED_PATCH */), [
                 [vue__WEBPACK_IMPORTED_MODULE_0__.vModelCheckbox, $data.form.receive_email]
               ]),
@@ -2431,7 +2439,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           ]),
           (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_FormTextareaGroup, {
             modelValue: $data.form.description,
-            "onUpdate:modelValue": _cache[6] || (_cache[6] = $event => ($data.form.description = $event)),
+            "onUpdate:modelValue": _cache[7] || (_cache[7] = $event => ($data.form.description = $event)),
             label: "Description",
             id: "description"
           }, null, 8 /* PROPS */, ["modelValue"])

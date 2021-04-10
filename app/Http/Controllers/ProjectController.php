@@ -39,7 +39,8 @@ class ProjectController extends Controller
             'description',
             'receive_email',
             'slack_webhook',
-            'discord_webhook'
+            'discord_webhook',
+            'custom_webhook',
         ]));
 
         $request->user()->projects()->save($project, ['owner' => true]);

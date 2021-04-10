@@ -30,6 +30,12 @@
                             label="Discord Webhook URL"
                             id="discord_webhook_url"
                     />
+                    <FormInputGroup
+                            v-model="form.custom_webhook"
+                            :error="$page.props.errors.custom_webhook"
+                            label="Custom Webhook URL"
+                            id="custom_webhook_url"
+                    />
                 </div>
                 <FormTextareaGroup v-model="form.description" label="Description" id="description"/>
 
@@ -77,6 +83,7 @@ export default {
                 receive_email: false,
                 slack_webhook: null,
                 discord_webhook: null,
+                custom_webhook: null,
             },
         }
     },

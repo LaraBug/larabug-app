@@ -8,6 +8,8 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use App\Notifications\Discord\DiscordChannel;
 use App\Notifications\Discord\DiscordMessage;
+use NotificationChannels\Webhook\WebhookChannel;
+use NotificationChannels\Webhook\WebhookMessage;
 use Illuminate\Notifications\Messages\SlackMessage;
 
 class ExceptionWasCreated extends Notification implements ShouldQueue
@@ -45,6 +47,10 @@ class ExceptionWasCreated extends Notification implements ShouldQueue
 
         if ($notifiable->discord_webhook) {
             $array[] = DiscordChannel::class;
+        }
+
+        if ($notifiable->custom_webhook) {
+            $array[] = WebhookChannel::class;
         }
 
         return $array;
@@ -112,6 +118,27 @@ class ExceptionWasCreated extends Notification implements ShouldQueue
                     ]
                 ],
             ]);
+    }
+
+    /**
+     * Get the webhook representation of the notification.
+     *
+     * @param  mixed $notifiable
+     *
+     * @return WebhookMessage
+     */
+    public function toWebhook($notifiable)
+    {
+         return WebhookMessage::create()
+            ->data([
+                'Exception' => $this->exception->exception,
+                'RouteUrl' => $this->exception->route_url,
+                'Class' => $this->exception->class,
+                'Date' => $this->exception->created_at->format('Y-m-d H:i:s') . ' (UTC)',
+                'File' => $this->exception->file,
+                'Line' => $this->exception->line,
+            ])
+            ->userAgent("LaraBug");
     }
 
     /**

@@ -34,7 +34,8 @@ class Project extends Model implements HasMedia
         'description',
         'receive_email',
         'slack_webhook',
-        'discord_webhook'
+        'discord_webhook',
+        'custom_webhook'
     ];
 
     protected $dates = [
@@ -75,6 +76,11 @@ class Project extends Model implements HasMedia
     public function routeNotificationForDiscord()
     {
         return $this->discord_webhook;
+    }
+
+    public function routeNotificationForWebhook()
+    {
+        return $this->custom_webhook;
     }
 
     public function isOwner()
