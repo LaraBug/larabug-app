@@ -13,7 +13,7 @@
                 {{ $exception->exception }}
             </h1>
 
-            <table class="w-full text-left">
+            <table class="w-full text-left -ml-4">
                 <tr>
                     <th class="px-4 py-2">Method</th>
                     <td class="px-4 py-2">{{ $exception->method }}</td>
