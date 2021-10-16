@@ -9,10 +9,78 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 /**
- * @property mixed plan
- * @property string api_token
- * @property mixed is_admin
- * @property bool plan_notified
+ * App\Models\User
+ *
+ * @property int $id
+ * @property string|null $name
+ * @property string $email
+ * @property string|null $billing_details
+ * @property array|null $settings
+ * @property string $password
+ * @property string|null $api_token
+ * @property int $first_setup
+ * @property bool $is_admin
+ * @property string $locale
+ * @property bool $newsletter
+ * @property bool $receive_email
+ * @property int|null $plan_id
+ * @property \Illuminate\Support\Carbon|null $plan_expires_at
+ * @property bool $plan_notified
+ * @property string|null $remember_token
+ * @property string|null $google2fa_secret
+ * @property int $total_logins
+ * @property string|null $last_mobile_login_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\UserFcmToken[] $fcmTokens
+ * @property-read int|null $fcm_tokens_count
+ * @property-read mixed $first_name
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Newsletter[] $newsletters
+ * @property-read int|null $newsletters_count
+ * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
+ * @property-read int|null $notifications_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Order[] $orders
+ * @property-read int|null $orders_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Order[] $ordersLatest
+ * @property-read int|null $orders_latest_count
+ * @property-read \App\Models\Plan|null $plan
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\ProjectGroup[] $projectGroups
+ * @property-read int|null $project_groups_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Project[] $projects
+ * @property-read int|null $projects_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\SocialUser[] $socialUsersLatest
+ * @property-read int|null $social_users_latest_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\SocialUser[] $social_users
+ * @property-read int|null $social_users_count
+ * @method static \Illuminate\Database\Eloquent\Builder|User expired()
+ * @method static \Database\Factories\UserFactory factory(...$parameters)
+ * @method static \Illuminate\Database\Eloquent\Builder|User newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|User newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|User paidPlan()
+ * @method static \Illuminate\Database\Eloquent\Builder|User query()
+ * @method static \Illuminate\Database\Eloquent\Builder|User wantsEmail()
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereApiToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereBillingDetails($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereFirstSetup($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereGoogle2faSecret($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereIsAdmin($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereLastMobileLoginAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereLocale($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereNewsletter($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User wherePassword($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User wherePlanExpiresAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User wherePlanId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User wherePlanNotified($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereReceiveEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereSettings($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereTotalLogins($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 class User extends Authenticatable
 {

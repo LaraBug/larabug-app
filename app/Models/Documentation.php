@@ -6,6 +6,34 @@ use Spatie\EloquentSortable\Sortable;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\EloquentSortable\SortableTrait;
 
+/**
+ * App\Models\Documentation
+ *
+ * @property int $id
+ * @property string|null $slug
+ * @property string|null $title
+ * @property string|null $content
+ * @property int $default
+ * @property int $order_column
+ * @property int|null $documentation_category_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\DocumentationCategory|null $category
+ * @method static \Illuminate\Database\Eloquent\Builder|Documentation newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Documentation newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Documentation ordered(string $direction = 'asc')
+ * @method static \Illuminate\Database\Eloquent\Builder|Documentation query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Documentation whereContent($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Documentation whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Documentation whereDefault($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Documentation whereDocumentationCategoryId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Documentation whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Documentation whereOrderColumn($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Documentation whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Documentation whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Documentation whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class Documentation extends Model implements Sortable
 {
     use SortableTrait;

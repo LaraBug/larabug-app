@@ -92,6 +92,12 @@
     ],
     "format": [
       "vendor/bin/php-cs-fixer fix"
+    ],
+    "ide-helper-model": [
+      "Illuminate\\Foundation\\ComposerScripts::postUpdate",
+      "@php artisan ide-helper:generate --ansi",
+      "@php artisan ide-helper:meta --ansi",
+      "@php artisan ide-helper:models --reset --write --ansi"
     ]
   },
   "config": {

@@ -7,6 +7,16 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Models\Sponsor
+ *
+ * @property int $id
+ * @method static \Illuminate\Database\Eloquent\Builder|Sponsor newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Sponsor newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Sponsor query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Sponsor whereId($value)
+ * @mixin \Eloquent
+ */
 class Sponsor extends Model
 {
     use Sushi;
