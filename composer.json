@@ -47,11 +47,13 @@
   "require-dev": {
     "barryvdh/laravel-debugbar": "^3.2",
     "barryvdh/laravel-ide-helper": "^2.8",
-    "friendsofphp/php-cs-fixer": "^3.1.0",
     "facade/ignition": "^2.5",
     "fakerphp/faker": "^1.9.1",
+    "friendsofphp/php-cs-fixer": "^3.1.0",
     "mockery/mockery": "^1.4.2",
     "nunomaduro/collision": "^5.0",
+    "nunomaduro/larastan": "^0.7.13",
+    "phpstan/phpstan": "^0.12.99",
     "phpunit/phpunit": "^9.3.3"
   },
   "autoload": {
@@ -92,7 +94,8 @@
     ],
     "format": [
       "vendor/bin/php-cs-fixer fix"
-    ]
+    ],
+    "phpstan": "vendor/bin/phpstan analyse"
   },
   "config": {
     "preferred-install": "dist",
