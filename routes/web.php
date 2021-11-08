@@ -69,11 +69,6 @@ Route::middleware('auth')->prefix('panel')->name('panel.')->group(function () {
     Route::post('projects/{id}/exceptions/mark-all-fixed', [ExceptionController::class, 'markAllAsFixed'])->name('exceptions.mark-all-fixed');
     Route::post('projects/{id}/exceptions/mark-all-read', [ExceptionController::class, 'markAllAsRead'])->name('exceptions.mark-all-read');
 
-    Route::get('feedback', [FeedbackController::class, 'index'])
-        ->middleware('has.feature:feedback')
-        ->name('feedback.index');
-
-
     Route::group(['prefix' => 'profile'], function () {
         Route::get('/', [ProfileController::class, 'show'])->name('profile.show');
         Route::patch('/', [ProfileController::class, 'update'])->name('profile.update');

@@ -8,20 +8,6 @@ use Illuminate\Http\Request;
 
 class FeedbackController extends Controller
 {
-    public function index(Request $request)
-    {
-        $feedback = Feedback::with(['exception', 'exception.project'])
-            ->whereHas('exception', function ($query) use ($request) {
-                $query->whereIn('project_id', $request->user()->projects->map->id);
-            })
-            ->latest()
-            ->paginateFilter();
-
-        return inertia('Feedback/Index', [
-            'feedback' => $feedback
-        ]);
-    }
-
     public function script(Request $request)
     {
         $project = Project::whereHas('users', function ($query) {
