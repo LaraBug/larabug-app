@@ -4,7 +4,6 @@ $finder = Symfony\Component\Finder\Finder::create()
     ->notPath('vendor')
     ->notPath('bootstrap')
     ->notPath('storage')
-    ->notPath('nova')
     ->in(__DIR__)
     ->name('*.php')
     ->notName('*.blade.php');
