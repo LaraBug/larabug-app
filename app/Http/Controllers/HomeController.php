@@ -50,9 +50,4 @@ class HomeController extends Controller
             'totalProjects' => $totalProjects
         ]);
     }
-
-    public function introduction()
-    {
-        return inertia('Dashboard/Introduction');
-    }
 }

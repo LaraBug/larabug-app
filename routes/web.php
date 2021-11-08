@@ -49,7 +49,6 @@ Route::get('scripts/feedback', [FeedbackController::class, 'script'])->name('fee
 
 Route::middleware('auth')->prefix('panel')->name('panel.')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('dashboard');
-    Route::get('introduction', [HomeController::class, 'introduction'])->name('introduction');
 
     Route::resource('projects', ProjectController::class);
     Route::get('projects/{id}/installation', [ProjectController::class, 'installation'])->name('projects.installation');
