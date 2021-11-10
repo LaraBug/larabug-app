@@ -7,8 +7,8 @@ parameters:
         - app
         - routes
 
-    # The level 8 is the highest level
-    level: 5
+    # The level 9 is the highest level
+    level: 1
 
     ignoreErrors:
         # level 5
