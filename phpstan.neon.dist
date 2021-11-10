@@ -19,5 +19,15 @@ parameters:
         - routes/console.php
         - tests
 
+    # https://phpstan.org/config-reference#vague-typehints
     checkMissingIterableValueType: false
+
+    # https://github.com/nunomaduro/larastan/blob/master/docs/rules.md#configuration-2
+    checkModelProperties: true
+
+    # https://github.com/nunomaduro/larastan/blob/master/docs/rules.md#configuration
+    noModelMake: true
+
+    earlyTerminatingFunctionCalls:
+    - rd
 
