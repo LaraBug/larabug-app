@@ -2,22 +2,16 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
-use App\Models\Feedback;
 use App\Models\Exception;
+use App\Models\Feedback;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
 
-class FeedbackTest extends TestCase
-{
-    /** @test */
-    public function it_belongs_to_an_exception()
-    {
-        Notification::fake();
-        Mail::fake();
+it('belongs to an exception', function () {
+    Notification::fake();
+    Mail::fake();
 
-        $feedback = Feedback::factory()->create();
+    expect(Feedback::factory()->create()->exception)
+        ->toBeInstanceOf(Exception::class);
+});
 
-        $this->assertInstanceof(Exception::class, $feedback->exception);
-    }
-}

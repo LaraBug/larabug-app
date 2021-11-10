@@ -38,7 +38,7 @@ and generalize stuff better.
 ## Testing
 
 ```bash
-./vendor/bin/phpunit tests
+./vendor/bin/pest
 ```
 
 ## Changelog

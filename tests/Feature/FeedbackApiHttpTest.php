@@ -1,42 +1,32 @@
 <?php
 
-namespace Tests\Feature;
-
-use Tests\TestCase;
-use App\Models\User;
-use App\Models\Project;
 use App\Models\Exception;
+use App\Models\Project;
+use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 
-class FeedbackApiHttpTest extends TestCase
-{
-    private $project;
-    private $user;
+use function Pest\Laravel\post;
+use function Pest\Laravel\withoutExceptionHandling;
 
-    public function setUp(): void
-    {
-        parent::setUp();
+beforeEach(function () {
+    Mail::fake();
+    $this->project = Project::factory()->create();
+    $this->user = User::factory()->create();
+    $this->user->projects()->save($this->project, ['owner' => true]);
+});
 
-        Mail::fake();
-        $this->project = Project::factory()->create();
-        $this->user = User::factory()->create();
-        $this->user->projects()->save($this->project, ['owner' => true]);
-    }
+it('adds feedback to an exception', function () {
+    $exception = Exception::factory()->create([
+        'project_id' => $this->project->id,
+    ]);
 
-    /** @test */
-    public function it_adds_feedback_to_an_exception()
-    {
-        $exception = Exception::factory()->create([
-            'project_id' => $this->project->id
-        ]);
+    withoutExceptionHandling();
 
-        $this->withoutExceptionHandling();
+    post(route('api.feedback'), [
+        'id' => $exception->id,
+        'name' => $this->faker->name,
+        'email' => $this->faker->email,
+        'feedback' => $this->faker->sentence,
+    ])->assertOk();
+});
 
-        $this->post(route('api.feedback'), [
-            'id' => $exception->id,
-            'name' => $this->faker->name,
-            'email' => $this->faker->email,
-            'feedback' => $this->faker->sentence
-        ])->assertOk();
-    }
-}

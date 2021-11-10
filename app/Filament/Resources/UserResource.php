@@ -4,20 +4,35 @@ namespace App\Filament\Resources;
 
 use Filament\Resources\Resource;
 use Filament\Resources\Forms\Form;
+use Filament\Forms\Components\Grid;
 use Filament\Resources\Tables\Table;
 use Filament\Resources\Tables\Columns;
 use Filament\Resources\Forms\Components;
 use App\Filament\Resources\UserResource\Pages;
+use App\Filament\Resources\Forms\Components\Abilities;
 
 class UserResource extends Resource
 {
-    public static $icon = 'heroicon-o-collection';
+    public static $icon = 'heroicon-o-users';
 
     public static function form(Form $form)
     {
         return $form
             ->schema([
                 Components\TextInput::make('name')->autofocus()->required(),
+                Grid::make([
+                    Components\Checkbox::make('is_admin'),
+                ])->columns(2),
+
+                Components\Tabs::make('Test')
+                    ->tabs([
+                        Components\Tab::make(
+                            'Abilities',
+                            [
+                                Abilities::make('abilities')->label(false),
+                            ],
+                        ),
+                    ]),
             ]);
     }
 
@@ -25,12 +40,12 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                Columns\Text::make('name')->primary(),
-                Columns\Text::make('email'),
-
+                Columns\Text::make('name')->searchable()->primary(),
+                Columns\Text::make('email')->searchable(),
+                Columns\Text::make('created_at')->label('Registered at')->sortable(),
+                Columns\Boolean::make('is_admin'),
             ])
             ->filters([
-                //
             ]);
     }
 

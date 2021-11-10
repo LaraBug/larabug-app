@@ -25,7 +25,8 @@ class ProjectResource extends Resource
     {
         return $table
             ->columns([
-                Columns\Text::make('title'),
+                Columns\Text::make('title')->searchable(),
+                Columns\Text::make('created_at')->sortable(),
             ])
             ->filters([
                 //

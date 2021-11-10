@@ -13,6 +13,7 @@ _ide_helper.php
 public/sitemap.xml
 /public/storage
 .phpunit.result.cache
+.php-cs-fixer.cache
 
 # Ignore compiled frontend code
 /public/css/*.css

@@ -11,7 +11,7 @@ use App\Filament\Resources\ExceptionResource\Pages;
 
 class ExceptionResource extends Resource
 {
-    public static $icon = 'heroicon-o-collection';
+    public static $icon = 'heroicon-o-fire';
 
     public static function form(Form $form)
     {

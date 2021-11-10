@@ -1,17 +1,6 @@
 <?php
 
-namespace Tests;
+test('basic example')
+    ->get('/login')
+    ->assertOk();
 
-class ExampleTest extends TestCase
-{
-    /**
-     * A basic functional test example.
-     *
-     * @return void
-     */
-    public function testBasicExample()
-    {
-        $this->get('/login')
-             ->assertOk();
-    }
-}

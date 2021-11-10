@@ -124,4 +124,17 @@ return [
     */
 
     'register_enabled' => env('AUTH_REGISTER_ENABLED', true),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Custom LaraBug abilities
+    |--------------------------------------------------------------------------
+    |
+    | Manage abilities.
+    |
+    */
+    'abilities' => [
+        'extended_store' => 'Extended Store',
+    ],
+
 ];
