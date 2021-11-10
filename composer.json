@@ -54,9 +54,9 @@
     "friendsofphp/php-cs-fixer": "^3.1.0",
     "mockery/mockery": "^1.4.2",
     "nunomaduro/collision": "^5.0",
+    "nunomaduro/larastan": "^0.7.13",
     "pestphp/pest": "^1.20",
     "pestphp/pest-plugin-laravel": "^1.1",
-    "nunomaduro/larastan": "^0.7.13",
     "phpstan/phpstan": "^0.12.99"
   },
   "autoload": {
