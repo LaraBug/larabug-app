@@ -216,7 +216,7 @@ class Exception extends Model
     public function makePublic()
     {
         $this->publish_hash = str_random(15);
-        $this->published_at = carbon();
+        $this->published_at = now();
         $this->save();
 
         return $this;

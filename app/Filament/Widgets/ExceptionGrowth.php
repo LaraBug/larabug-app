@@ -2,7 +2,6 @@
 
 namespace App\Filament\Widgets;
 
-use Carbon\Carbon;
 use App\Models\Exception;
 use Filament\Widgets\Widget;
 
@@ -12,8 +11,8 @@ class ExceptionGrowth extends Widget
 
     public function render()
     {
-        $previousMonthStart = Carbon::now()->subDays(60);
-        $thisMonthStart = Carbon::now()->subDays(30);
+        $previousMonthStart = now()->subDays(60);
+        $thisMonthStart = now()->subDays(30);
 
         $previousMonth = Exception::query()
             ->where('created_at', '>=', $previousMonthStart)

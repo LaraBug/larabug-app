@@ -16,8 +16,8 @@ class Stats
      */
     public function exceptionGrowth()
     {
-        $exceptions = Exception::where('created_at', '>=', carbon()->subDays(30))
-            ->where('created_at', '<=', carbon())
+        $exceptions = Exception::where('created_at', '>=', now()->subDays(30))
+            ->where('created_at', '<=', now())
             ->oldest()
             ->get();
 
@@ -40,8 +40,8 @@ class Stats
      */
     public function orderGrowth()
     {
-        $orders = Order::paid()->where('created_at', '>=', carbon()->subDays(30))
-            ->where('created_at', '<=', carbon())
+        $orders = Order::paid()->where('created_at', '>=', now()->subDays(30))
+            ->where('created_at', '<=', now())
             ->get([
                 'created_at'
             ]);

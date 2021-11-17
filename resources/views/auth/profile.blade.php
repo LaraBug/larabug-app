@@ -108,7 +108,7 @@
                                     @if(auth()->user()->plan_expires_at)
                                         (Expires at: {{ auth()->user()->plan_expires_at->format('Y-m-d') }})
 
-                                        @if(auth()->user()->plan_expires_at->lt(carbon()))
+                                        @if(auth()->user()->plan_expires_at->lt(now()))
                                             <span class="badge badge-warning">
                                                 Expired
                                             </span>

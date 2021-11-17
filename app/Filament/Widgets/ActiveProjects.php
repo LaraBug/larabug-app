@@ -2,7 +2,6 @@
 
 namespace App\Filament\Widgets;
 
-use Carbon\Carbon;
 use App\Models\Project;
 use Filament\Widgets\Widget;
 
@@ -12,7 +11,7 @@ class ActiveProjects extends Widget
 
     public function render()
     {
-        $lastMonth = Carbon::now()->subMonth();
+        $lastMonth = now()->subMonth();
 
         $count = Project::where('last_error_at', '>=', $lastMonth)->count();
 

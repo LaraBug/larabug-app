@@ -124,7 +124,7 @@ class User extends Authenticatable implements FilamentUser
         return $query->where(function ($query) {
             return $query
                 ->whereNotNull('plan_expires_at')
-                ->where('plan_expires_at', '<', carbon())
+                ->where('plan_expires_at', '<', now())
                 ->where('plan_notified', false);
         });
     }
