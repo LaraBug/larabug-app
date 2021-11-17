@@ -4,6 +4,9 @@ namespace App\Http\Resources\Api;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @mixin \App\Models\Sponsor
+ */
 class SponsorResource extends JsonResource
 {
     /**

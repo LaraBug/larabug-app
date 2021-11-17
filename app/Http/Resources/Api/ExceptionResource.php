@@ -4,6 +4,9 @@ namespace App\Http\Resources\Api;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @mixin \App\Models\Exception
+ */
 class ExceptionResource extends JsonResource
 {
     /**
@@ -14,7 +17,6 @@ class ExceptionResource extends JsonResource
      */
     public function toArray($request)
     {
-        /* @var $this \App\Models\Exception */
         return [
             'id' => $this->id,
             'status' => strtolower($this->status),

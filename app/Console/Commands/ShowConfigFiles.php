@@ -41,6 +41,7 @@ class ShowConfigFiles extends Command
         $configs = config();
         $configArray = $configs->all();
         foreach ($configArray as $header => $items) {
+            $data = [];
             foreach ($items as $key => $value) {
                 if (!is_array($value)) {
                     $data[$header][] = [$key, $value];

@@ -12,27 +12,32 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
- * @property string slack_webhook
- * @property string discord_channel
- * @property string discord_webhook
- * @property string title
- * @property mixed pivot
- * @property boolean receive_email
- * @property boolean notifications_enabled
- * @property boolean mobile_notifications_enabled
- * @property boolean slack_webhook_enabled
- * @property boolean discord_webhook_enabled
- * @property boolean custom_webhook_enabled
- * @property string key
- * @property mixed url
+ * @property int $id
+ * @property string $slack_webhook
+ * @property string $discord_channel
+ * @property string $discord_webhook
+ * @property string $title
+ * @property mixed $pivot
+ * @property bool $receive_email
+ * @property bool $notifications_enabled
+ * @property bool $mobile_notifications_enabled
+ * @property bool $slack_webhook_enabled
+ * @property bool $discord_webhook_enabled
+ * @property bool $custom_webhook_enabled
+ * @property string $key
+ * @property mixed $url
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $last_exception_at
+ * @property-read int|null $total_exceptions
  */
 class Project extends Model implements HasMedia
 {
-    use Uuid,
-        Filterable,
-        Notifiable,
-        InteractsWithMedia,
-        HasFactory;
+    use Filterable;
+    use HasFactory;
+    use InteractsWithMedia;
+    use Notifiable;
+    use Uuid;
 
     protected $fillable = [
         'url',
@@ -62,6 +67,7 @@ class Project extends Model implements HasMedia
         'slack_webhook_enabled' => 'boolean',
         'discord_webhook_enabled' => 'boolean',
         'custom_webhook_enabled' => 'boolean',
+        'total_exceptions' => 'int',
     ];
 
     protected $appends = [

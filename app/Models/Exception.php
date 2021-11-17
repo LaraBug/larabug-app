@@ -10,30 +10,39 @@ use App\Notifications\ExceptionWasCreated;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
- * @property mixed exception
- * @property mixed class
- * @property \Carbon\Carbon created_at
- * @property mixed file
- * @property mixed line
- * @property mixed project
- * @property string status
- * @property bool mailed
- * @property string publish_hash
- * @property null published_at
+ * @property int $id
+ * @property int $project_id
+ * @property mixed $exception
+ * @property mixed $class
+ * @property mixed $file
+ * @property mixed $line
+ * @property mixed $project
+ * @property string $status
+ * @property string $error
+ * @property string $fullUrl
+ * @property string $markup_language
+ * @property string $executor
+ * @property string $human_date
+ * @property array $executor_output
+ * @property array $storage
+ * @property bool $mailed
+ * @property bool $route_url
+ * @property string $publish_hash
+ * @property \Illuminate\Support\Carbon|null $published_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $snooze_until
+ * @property \Illuminate\Support\Carbon|null $updated_at
  */
 class Exception extends Model
 {
-    use Uuid,
-        Filterable,
-        HasFactory;
+    use Filterable;
+    use HasFactory;
+    use Uuid;
 
-    /**
-     * Status vars
-     */
-    const OPEN = 'OPEN';
-    const READ = 'READ';
-    const FIXED = 'FIXED';
-    const DONE = 'DONE';
+    public const OPEN = 'OPEN';
+    public const READ = 'READ';
+    public const FIXED = 'FIXED';
+    public const DONE = 'DONE';
 
     /**
      * @var array

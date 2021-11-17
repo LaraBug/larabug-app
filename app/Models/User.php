@@ -11,17 +11,19 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 /**
- * @property mixed plan
- * @property string api_token
- * @property mixed is_admin
- * @property bool plan_notified
+ * @property string $name
+ * @property string $email
+ * @property-read Plan $plan
+ * @property string $api_token
+ * @property mixed $is_admin
+ * @property bool $plan_notified
  */
 class User extends Authenticatable implements FilamentUser
 {
-    use Notifiable,
-        Planable,
-        HasFactory,
-        IsFilamentUser;
+    use HasFactory;
+    use IsFilamentUser;
+    use Notifiable;
+    use Planable;
 
     protected $fillable = [
         'name',

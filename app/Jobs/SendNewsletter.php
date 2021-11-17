@@ -46,11 +46,13 @@ class SendNewsletter implements ShouldQueue
         foreach ($this->users as $user) {
             $user->newsletters()->save($this->newsletter);
 
-            Mail::queue('emails.newsletter', ['user' => $user, 'subject' => $subject, 'content' => $this->content], function ($message) use ($user, $subject) {
-                $message->to($user['email'], $user['name']);
-
-                $message->subject($subject);
-            });
+            Mail::queue('emails.newsletter', ['user' => $user, 'subject' => $subject, 'content' => $this->content]
+//                , function ($message) use ($user, $subject) {
+//                $message->to($user['email'], $user['name']);
+//
+//                $message->subject($subject);
+//            }
+            );
         }
     }
 }
