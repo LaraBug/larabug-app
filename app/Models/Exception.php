@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\CreateOrUpdateIssue;
 use Kblais\Uuid\Uuid;
 use DateTimeInterface;
 use EloquentFilter\Filterable;
@@ -276,4 +277,8 @@ class Exception extends Model
             }
         });
     }
+
+    protected $dispatchesEvents = [
+        'created' => CreateOrUpdateIssue::class,
+    ];
 }

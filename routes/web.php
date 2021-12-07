@@ -3,6 +3,7 @@
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\GroupController;
+use App\Http\Controllers\IssuesController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\ExceptionController;
@@ -51,14 +52,23 @@ Route::middleware('auth')->prefix('panel')->name('panel.')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('dashboard');
     Route::get('introduction', [HomeController::class, 'introduction'])->name('introduction');
 
+    /**
+     * Project routes
+     */
     Route::resource('projects', ProjectController::class);
     Route::get('projects/{id}/installation', [ProjectController::class, 'installation'])->name('projects.installation');
     Route::get('projects/{id}/feedback-installation', [ProjectController::class, 'feedbackInstallation'])->name('projects.feedback-installation');
     Route::post('projects/{id}/test-webhook', [ProjectController::class, 'testWebhook'])->name('projects.test.webhook');
     Route::post('projects/{id}/remove-image', [ProjectController::class, 'removeImage'])->name('projects.remove.image');
 
+    /**
+     * Group routes
+     */
     Route::resource('groups', GroupController::class);
 
+    /**
+     * Project routes
+     */
     Route::delete('projects/{id}/exceptions/delete-all', [ExceptionController::class, 'deleteAll'])->name('exceptions.delete-all');
     Route::post('projects/{id}/exceptions/delete-selected', [ExceptionController::class, 'deleteSelected'])->name('exceptions.delete-selected');
     Route::resource('projects/{id}/exceptions', ExceptionController::class);
@@ -70,11 +80,22 @@ Route::middleware('auth')->prefix('panel')->name('panel.')->group(function () {
     Route::post('projects/{id}/exceptions/mark-all-fixed', [ExceptionController::class, 'markAllAsFixed'])->name('exceptions.mark-all-fixed');
     Route::post('projects/{id}/exceptions/mark-all-read', [ExceptionController::class, 'markAllAsRead'])->name('exceptions.mark-all-read');
 
+    /**
+     * Issue routes
+     */
+    Route::resource('issues', IssuesController::class);
+
+    /**
+     * Feedback routes
+     */
     Route::get('feedback', [FeedbackController::class, 'index'])
         ->middleware('has.feature:feedback')
         ->name('feedback.index');
 
 
+    /**
+     * Profile routes
+     */
     Route::group(['prefix' => 'profile'], function () {
         Route::get('/', [ProfileController::class, 'show'])->name('profile.show');
         Route::patch('/', [ProfileController::class, 'update'])->name('profile.update');

@@ -174,6 +174,11 @@ class Project extends Model implements HasMedia
         return $this->hasManyThrough(Feedback::class, Exception::class);
     }
 
+    public function issues()
+    {
+        return $this->hasMany(Issue::class);
+    }
+
     public function scopeFilter($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {

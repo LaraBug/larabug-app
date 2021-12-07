@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Events\CreateOrUpdateIssue;
+use App\Listeners\HandleIssue;
 use App\Listeners\UpdateLoginData;
 use App\Events\ExceptionWasCreated;
 use App\Listeners\UpdateStatistics;
@@ -18,6 +20,10 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         ExceptionWasCreated::class => [
             //UpdateStatistics::class,
+        ],
+
+        CreateOrUpdateIssue::class => [
+            HandleIssue::class,
         ],
 
         \Illuminate\Auth\Events\Login::class => [
