@@ -2,6 +2,7 @@ import {createApp, h} from 'vue'
 import { createInertiaApp, Head, Link } from '@inertiajs/inertia-vue3'
 import {InertiaProgress} from '@inertiajs/progress'
 import Toast from "vue-toastification";
+import 'charts.css/dist/charts.min.css'
 
 InertiaProgress.init({
     delay: 250,

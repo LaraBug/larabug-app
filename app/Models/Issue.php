@@ -34,6 +34,7 @@ class Issue extends Model
         'status_text',
         'human_date',
         'exception_count',
+        'affected_versions',
     ];
 
     public $dates = [
@@ -53,12 +54,26 @@ class Issue extends Model
 
     public function getHumanDateAttribute()
     {
+        if (!$this->last_error_at) {
+            return '';
+        }
+
         return $this->last_error_at->diffForHumans();
     }
 
     public function getStatusTextAttribute()
     {
         return trans('status.' . strtoupper($this->status));
+    }
+
+    public function getAffectedVersionsAttribute()
+    {
+        $versions = $this->exceptions()
+            ->distinct('project_version')
+            ->pluck('project_version')
+            ->toArray();
+
+        return implode(', ', $versions);
     }
 
     /**

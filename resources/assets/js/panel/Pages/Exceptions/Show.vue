@@ -253,7 +253,7 @@
 </template>
 
 <script>
-import ExceptionLayout from '@/Layouts/ExceptionLayout'
+import CompactLayout from '@/Layouts/CompactLayout'
 
 import Breadcrumbs from '@/Components/Breadcrumbs'
 import BreadcrumbsItem from '@/Components/BreadcrumbsItem'
@@ -270,7 +270,7 @@ import DropdownOption from "../../Components/DropdownOption";
 
 export default {
 
-    layout: ExceptionLayout,
+    layout: CompactLayout,
     components: {
       DropdownOption,
       Dropdown,
