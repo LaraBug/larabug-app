@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\Project\ProjectSavedEvent;
 use Kblais\Uuid\Uuid;
 use EloquentFilter\Filterable;
 use Spatie\MediaLibrary\HasMedia;
@@ -220,4 +221,8 @@ class Project extends Model implements HasMedia
             $project->feedback()->delete();
         });
     }
+
+    public $dispatchesEvents = [
+        'saved' => ProjectSavedEvent::class,
+    ];
 }

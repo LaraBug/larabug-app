@@ -26,27 +26,31 @@ class GithubIssues
         $this->client = new Client();
 
         //
-        try {
-            $this->client->authenticate($this->user->github_access_token, null, \Github\AuthMethod::ACCESS_TOKEN);
-        } catch(\Exception $ex) {
-            ray()->exception($ex);
-        }
-
-        ray($this->client);
+        $this->client->authenticate($this->user->github_access_token, null, \Github\AuthMethod::ACCESS_TOKEN);
     }
 
     public function create($title, $body)
     {
-        try {
-            $response = $this->client->api('issue')->create($this->repoUser, $this->repoRepo, [
-                'title' => $title,
-                'body' => $body,
-            ]);
-        } catch (\Exception $exception) {
-            ray()->exception($exception);
-        }
+        return $this->client->api('issue')->create($this->repoUser, $this->repoRepo, [
+            'title' => $title,
+            'body' => $body,
+        ]);
+    }
 
-        return $response;
+    public function createWebhook()
+    {
+        return $this->client->api('repo')->hooks()->create($this->repoUser, $this->repoRepo, [
+            'owner' => $this->repoUser,
+            'repo' => $this->repoRepo,
+            'name' => 'web',
+            'config' => [
+                'url' => url('github-webhook'),
+                'content_type' => 'json',
+                'secret' => 'abc123',
+                'insecure_ssl' => 1,
+            ],
+            'events' => ['*'],
+        ]);
     }
 
     public static function make($user, $repo)
