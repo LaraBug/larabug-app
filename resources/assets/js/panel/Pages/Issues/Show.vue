@@ -85,10 +85,15 @@
       <h2 class="text-2xl font-bold">Timeline</h2>
 
       <div class="relative overflow-hidden h-full">
-        <div class="">
-          <div class="bg-white border border-gray-200 rounded-lg p-5">
-            <p>
-              Issue created at {{ issue.created_at }}
+        <div class="space-y-5">
+          <div
+            class="bg-white border border-gray-200 rounded-lg p-5 space-y-2"
+            v-for="(event, index) in events"
+            :key="index"
+          >
+            <p class="text-md"><span v-html="event.content"></span> by {{ event.causer }} </p>
+            <p class="text-gray-600 text-sm">
+              <b class="font-medium">{{ event.action }}</b> at {{ event.created_at }}
             </p>
           </div>
         </div>
@@ -116,6 +121,7 @@ export default {
   layout: CompactLayout,
   props: {
     issue: {},
+    events: {},
     project: {},
     exception: {},
     exceptions: {},

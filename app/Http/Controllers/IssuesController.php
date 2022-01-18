@@ -51,6 +51,7 @@ class IssuesController extends Controller
 
         return inertia('Issues/Show', [
             'issue' => $issue,
+            'events' => $issue->events()->orderBy('created_at', 'desc')->get(),
             'exception' => $exception,
             'exceptions' => $exceptions,
             'project' => $issue->project,

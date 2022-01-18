@@ -33,5 +33,7 @@ class HandleIssueReopenedJob implements ShouldQueue
         $issue->update([
             'status' => Issue::OPEN,
         ]);
+
+        $issue->log('github_issue_reopened', 'Issue reopened on GitHub', $this->webhookCall->payload('sender')['login']);
     }
 }

@@ -67,6 +67,9 @@ class HandleIssue implements ShouldQueue
             $issue->github_issue_url = $response['html_url'];
 
             $issue->save();
+
+            //
+            $issue->log('github_issue_created', "Created a GitHub issue <a href='{$response['html_url']}'></a>");
         }
     }
 }

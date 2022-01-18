@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
-use EloquentFilter\Filterable;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Kblais\Uuid\Uuid;
+use EloquentFilter\Filterable;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Issue extends Model
 {
@@ -50,6 +50,21 @@ class Issue extends Model
                 $model->status = self::OPEN;
             }
         });
+
+        self::created(function ($model) {
+            $data = [
+                'issue_id' => $model->id,
+                'action' => 'created',
+                'causer' => 'LaraBug',
+                'content' => 'First occurred so created a new issue',
+            ];
+
+            ray('Test');
+
+            $issueEvent = IssueEvent::create($data);
+
+            ray($issueEvent);
+        });
     }
 
     public function getHumanDateAttribute()
@@ -87,6 +102,14 @@ class Issue extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
+    public function events()
+    {
+        return $this->hasMany(IssueEvent::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function exceptions()
     {
         return $this->hasMany(Exception::class);
@@ -95,6 +118,18 @@ class Issue extends Model
     public function getExceptionCountAttribute()
     {
         return $this->exceptions->count();
+    }
+
+    public function log($action, $content, $causer = 'LaraBug')
+    {
+        $data = [
+            'issue_id' => $this->id,
+            'action' => $action,
+            'content' => $content,
+            'causer' => $causer,
+        ];
+
+        return IssueEvent::create($data);
     }
 
     public function scopeFilter($query, array $filters)

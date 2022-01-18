@@ -33,5 +33,8 @@ class HandleIssueClosedJob implements ShouldQueue
         $issue->update([
             'status' => Issue::FIXED,
         ]);
+
+        //
+        $issue->log('github_issue_closed', 'Issue closed on GitHub', $this->webhookCall->payload('sender')['login']);
     }
 }
