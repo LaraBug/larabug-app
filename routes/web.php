@@ -4,6 +4,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\IssuesController;
+use App\Http\Controllers\GithubController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\ExceptionController;
@@ -84,6 +85,15 @@ Route::middleware('auth')->prefix('panel')->name('panel.')->group(function () {
      * Issue routes
      */
     Route::resource('issues', IssuesController::class);
+
+    /**
+     * Github routes
+     */
+    Route::get('github/link', [GithubController::class, 'link'])
+        ->name('github.link');
+
+    Route::get('github/callback', [GithubController::class, 'callback'])
+        ->name('github.callback');
 
     /**
      * Feedback routes

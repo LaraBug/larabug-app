@@ -124,6 +124,18 @@
             </form>
         </Card>
 
+        <Card contained>
+          <template #header>
+            <h2 class="text-xl font-bold">Github</h2>
+          </template>
+
+          <div class="space-y-3">
+            <p v-if="form.github_access_token">Github account is linked.</p>
+
+            <Button as="inertia-link" @click="linkGithub" primary>Link Github account</Button>
+          </div>
+        </Card>
+
         <div>
             <Button secondary @click="logout">Logout</Button>
         </div>
@@ -164,7 +176,8 @@ export default {
                 email: this.user.email,
                 password: this.user.password,
                 newsletter: this.user.newsletter,
-                settings: this.settings
+                settings: this.settings,
+                github_access_token: this.user.github_access_token,
             }, {
               key: 'form'
             }),
@@ -206,7 +219,9 @@ export default {
                 onFinish: () => this.sending = false
             })
         },
-
+        linkGithub() {
+            window.location.href = '/panel/github/link';
+        },
         logout() {
             this.$inertia.post(this.route('logout'));
         }

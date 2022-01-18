@@ -13,17 +13,26 @@
 
   <div class="flex w-full bg-white px-6 py-3 border-b border-gray-200 space-x-3">
     <Button v-if="issue.status !== 'FIXED'" success>Mark as fixed</Button>
+
+    <Button @click="openUrl(issue.github_issue_url)" v-if="issue.github_issue_url" primary>View on GitHub</Button>
   </div>
 
 <!--  <div class="flex w-full bg-white px-6 py-3 border-b border-gray-200 space-x-3">
     Space for statistics
   </div>-->
 
-  <div class="w-full h-full flex bg-white relative overflow-y-hidden">
-    <div class="flex-1 h-full px-6 py-3 border-r border-gray-200">
-      <dl class="space-y-4">
+  <div class="w-full h-full flex relative overflow-y-hidden">
+    <aside class="w-full sm:w-1/4 sm:h-full bg-white border-r border-gray-200">
+      <dl class="px-6 py-4 space-y-4">
         <div>
-          <p>This issue caused <b class="font-bold">{{ issue.exception_count }}</b> times an exception</p>
+          <p>This issue caused <b class="font-bold">{{ issue.exception_count }}</b> times an exception.</p>
+        </div>
+
+        <div>
+          <dt class="text-sm font-medium">Project</dt>
+          <dd>
+            <Code>{{ project.title }}</Code>
+          </dd>
         </div>
 
         <div v-if="issue.affected_versions">
@@ -33,7 +42,7 @@
           </dd>
         </div>
 
-        <div v-if="exception.fullUrl">
+        <div v-if="exception && exception.fullUrl">
           <dt class="text-sm font-medium">URL</dt>
           <dd>
             <Code>{{ exception.fullUrl }}</Code>
@@ -62,74 +71,28 @@
         </div>
 
         <div>
-          <dt class="text-sm font-medium">Reported</dt>
+          <dt class="text-sm font-medium">First report</dt>
           <dd>
-            <Code>{{ exception.created_at }}</Code>
+            <Code>{{ issue.created_at }}</Code>
           </dd>
         </div>
       </dl>
-    </div>
+    </aside>
 
-    <div class="" style="width: 500px;">
-      <ul class="divide-y divide-gray-200">
-        <li v-for="exception in exceptions.data" :key="exception.id">
-          <div :href="route('panel.exceptions.show', {id: project.id, exception: exception })"
-               class="flex items-center px-6 py-4 space-x-6 hover:bg-gray-100">
-            <div class="flex items-center space-x-2">
-              <input
-                  :class="[
-      'text-primary-600 rounded border-gray-300 transition',
-      'focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-offset-0',
-    ]"
-                  id="newsletter"
-                  type="checkbox"
-                  :value="exception.id"
-                  v-model="selected"
-              />
-            </div>
+    <div class="flex-1 px-6 py-4 space-y-4 border-r border-gray-200">
+      <h2 class="text-2xl font-bold">Timeline</h2>
 
-            <inertia-link class="flex flex-1 items-center" :href="route('panel.exceptions.show', {id: project.id, exception: exception })">
-              <div class="flex-1">
-                <p class="font-medium text-bold"
-                   v-bind:class="{'text-gray-500': exception.status === 'FIXED'}">
-                </p>
-
-                <div class="text-sm text-gray-600 flex flex-col">
-                  <div>
-                    <Badge success v-if="exception.status === 'FIXED'">{{ exception.status_text }}</Badge>
-                    <Badge info v-if="exception.status === 'READ'">{{ exception.status_text }}</Badge>
-                    <Badge danger v-if="exception.status === 'OPEN'">{{ exception.status_text }}</Badge>
-                  </div>
-
-                  <div>
-                    <Badge info v-if="exception.snooze_until">Snoozed until {{ exception.snooze_until }}</Badge>
-                    {{ exception.human_date }} &centerdot;
-                    {{ exception.created_at }}
-                    <Badge info v-if="exception.file_type === 'javascript'">&centerdot; Javascript</Badge>
-                  </div>
-                </div>
-              </div>
-
-              <span v-if="exception.project_version"><Badge gray big>{{ exception.project_version }}</Badge></span>
-
-              <span v-if="exception.environment"><Badge gray big>{{ exception.environment }}</Badge></span>
-
-              <svg
-                  class="w-6 h-6 text-gray-500"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                    fill-rule="evenodd"
-                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                    clip-rule="evenodd"
-                ></path>
-              </svg>
-            </inertia-link>
+      <div class="relative overflow-hidden h-full">
+        <div class="">
+          <div class="bg-white border border-gray-200 rounded-lg p-5">
+            <p>
+              Issue created at {{ issue.created_at }}
+            </p>
           </div>
-        </li>
-      </ul>
+        </div>
+
+      </div>
+
     </div>
   </div>
 </template>
@@ -163,6 +126,11 @@ export default {
 
       selected: [],
     }
+  },
+  methods: {
+    openUrl(url) {
+      window.open(url, '_blank');
+    },
   },
 }
 </script>

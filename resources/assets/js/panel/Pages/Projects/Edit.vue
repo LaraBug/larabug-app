@@ -38,6 +38,33 @@
                     <FormTextareaGroup v-model="form.description" label="Description" id="description"/>
                 </div>
 
+                <div class="sm:col-span-6 border-t pt-4">
+                <div class="-ml-4 -mt-2 flex items-center justify-between">
+                  <div class="ml-4 mt-2">
+                    <h2 class="text-xl font-medium text-blue-gray-900">Github</h2>
+                    <p class="mt-1 text-sm text-blue-gray-500">Here you can change the Github settings for this project.</p>
+                  </div>
+                  <div class="ml-4 mt-2 flex-shrink-0">
+                    <input
+                        :class="[
+        'text-primary-600 rounded border-gray-300 transition',
+        'focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-offset-0',
+      ]"
+                        id="report_to_github_issues"
+                        type="checkbox"
+                        v-model="form.report_to_github_issues" />
+                  </div>
+                </div>
+
+                <div class="pt-5">
+                  <FormInputGroup
+                      v-model="form.github_repo"
+                      :error="form.errors.github_repo"
+                      label="Github repo"
+                      id="github_repo"
+                  />
+                </div>
+              </div>
 
                 <div class="sm:col-span-6 border-t pt-4">
                     <div class="-ml-4 -mt-2 flex items-center justify-between">
@@ -184,10 +211,14 @@ import Button from '@/Components/Button'
 import FormInputGroup from '@/Components/FormInputGroup'
 import FormTextareaGroup from '@/Components/FormTextareaGroup'
 import { useForm } from '@inertiajs/inertia-vue3'
+import Dropdown from "../../Components/Dropdown";
+import DropdownOption from "../../Components/DropdownOption";
 
 export default {
     layout: AppLayout,
     components: {
+      DropdownOption,
+      Dropdown,
         Breadcrumbs,
         BreadcrumbsItem,
         BreadcrumbsDivider,
@@ -217,6 +248,8 @@ export default {
                 custom_webhook_enabled: this.project.custom_webhook_enabled,
                 notifications_enabled: this.project.notifications_enabled,
                 mobile_notifications_enabled: this.project.mobile_notifications_enabled,
+                github_repo: this.project.github_repo,
+                report_to_github_issues: this.project.report_to_github_issues,
             }),
         }
     },

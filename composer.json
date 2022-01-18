@@ -44,7 +44,8 @@
     "spiral/roadrunner": "^2.0",
     "tedivm/jshrink": "^1.3",
     "tightenco/ziggy": "^1.2",
-    "tucker-eric/eloquentfilter": "^2.2"
+    "tucker-eric/eloquentfilter": "^2.2",
+    "knplabs/github-api": "v3.4.0"
   },
   "require-dev": {
     "barryvdh/laravel-debugbar": "^3.2",
