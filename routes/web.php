@@ -118,3 +118,5 @@ Route::middleware('auth')->prefix('panel')->name('panel.')->group(function () {
         });
     });
 });
+
+Route::githubWebhooks('github-webhook');

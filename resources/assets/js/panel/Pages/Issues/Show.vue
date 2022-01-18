@@ -14,6 +14,8 @@
   <div class="flex w-full bg-white px-6 py-3 border-b border-gray-200 space-x-3">
     <Button v-if="issue.status !== 'FIXED'" success>Mark as fixed</Button>
 
+    <Button v-if="issue.status == 'FIXED'" primary>Reopen issue</Button>
+
     <Button @click="openUrl(issue.github_issue_url)" v-if="issue.github_issue_url" primary>View on GitHub</Button>
   </div>
 

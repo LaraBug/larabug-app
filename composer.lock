@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fcd2b3f6211cb00abb58606eb056d0b9",
+    "content-hash": "24392519bf8066c77400fa71aee6746a",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -7390,6 +7390,80 @@
             "time": "2021-02-26T08:04:10+00:00"
         },
         {
+            "name": "spatie/laravel-github-webhooks",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-github-webhooks.git",
+                "reference": "ded122e3ad99ca62bd13720e0e31db5316208e1c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-github-webhooks/zipball/ded122e3ad99ca62bd13720e0e31db5316208e1c",
+                "reference": "ded122e3ad99ca62bd13720e0e31db5316208e1c",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^8.37",
+                "php": "^8.0",
+                "spatie/laravel-package-tools": "^1.9.0",
+                "spatie/laravel-webhook-client": "^3.0.1"
+            },
+            "require-dev": {
+                "nunomaduro/collision": "^5.5",
+                "orchestra/testbench": "^6.19",
+                "pestphp/pest": "^1.11",
+                "spatie/laravel-ray": "^1.23",
+                "spatie/pest-plugin-test-time": "^0.0.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Spatie\\GitHubWebhooks\\GitHubWebhooksServiceProvider"
+                    ],
+                    "aliases": {
+                        "GitHubWebhooks": "Spatie\\GitHubWebhooks\\GitHubWebhooksFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\GitHubWebhooks\\": "src",
+                    "Spatie\\GitHubWebhooks\\Database\\Factories\\": "database/factories"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Handle GitHub webhooks in a Laravel application",
+            "homepage": "https://github.com/spatie/laravel-github-webhooks",
+            "keywords": [
+                "laravel",
+                "laravel-github-webhooks",
+                "spatie"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/laravel-github-webhooks/issues",
+                "source": "https://github.com/spatie/laravel-github-webhooks/tree/1.1.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/Spatie",
+                    "type": "github"
+                }
+            ],
+            "time": "2021-07-28T13:52:53+00:00"
+        },
+        {
             "name": "spatie/laravel-honeypot",
             "version": "4.0.0",
             "source": {
@@ -7778,6 +7852,75 @@
                 }
             ],
             "time": "2021-08-11T21:14:25+00:00"
+        },
+        {
+            "name": "spatie/laravel-webhook-client",
+            "version": "3.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-webhook-client.git",
+                "reference": "66bebd6c90b95d238e4603196da17d2dea64e5c0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-webhook-client/zipball/66bebd6c90b95d238e4603196da17d2dea64e5c0",
+                "reference": "66bebd6c90b95d238e4603196da17d2dea64e5c0",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/bus": "^8.50|^9.0",
+                "illuminate/database": "^8.50|^9.0",
+                "illuminate/support": "^8.50|^9.0",
+                "php": "^8.0",
+                "spatie/laravel-package-tools": "^1.11"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^6.0|^7.0",
+                "phpunit/phpunit": "^9.3",
+                "spatie/laravel-ray": "^1.24"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Spatie\\WebhookClient\\WebhookClientServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\WebhookClient\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Receive webhooks in Laravel apps",
+            "homepage": "https://github.com/spatie/laravel-webhook-client",
+            "keywords": [
+                "laravel-webhook-client",
+                "spatie"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/laravel-webhook-client/issues",
+                "source": "https://github.com/spatie/laravel-webhook-client/tree/3.1.0"
+            },
+            "funding": [
+                {
+                    "url": "https://spatie.be/open-source/support-us",
+                    "type": "custom"
+                }
+            ],
+            "time": "2022-01-11T18:53:35+00:00"
         },
         {
             "name": "spatie/macroable",
