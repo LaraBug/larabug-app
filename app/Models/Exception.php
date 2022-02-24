@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Kblais\Uuid\Uuid;
 use DateTimeInterface;
 use EloquentFilter\Filterable;
@@ -35,13 +36,14 @@ class Exception extends Model
     const FIXED = 'FIXED';
     const DONE = 'DONE';
 
-    /**
-     * @var array
-     */
-    protected $guarded = [
-        'created_at',
-        'updated_at',
-        'published_at'
+    protected $appends = [
+        'human_date',
+        'public_route_url',
+        'route_url',
+        'status_text',
+        'short_exception_text',
+        'executor_output',
+        'markup_language'
     ];
 
     /**
@@ -55,14 +57,13 @@ class Exception extends Model
         'additional' => 'array'
     ];
 
-    protected $appends = [
-        'human_date',
-        'public_route_url',
-        'route_url',
-        'status_text',
-        'short_exception_text',
-        'executor_output',
-        'markup_language'
+    /**
+     * @var array
+     */
+    protected $guarded = [
+        'created_at',
+        'updated_at',
+        'published_at'
     ];
 
     public function getHumanDateAttribute()
@@ -152,6 +153,14 @@ class Exception extends Model
     public function scopeNew($query)
     {
         return $query->whereStatus(self::OPEN);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function issue(): BelongsTo
+    {
+        return $this->belongsTo(Issue::class);
     }
 
     /**
