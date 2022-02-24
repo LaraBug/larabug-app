@@ -18,7 +18,8 @@ return [
      * Environments where LaraBug should report
      */
     'environments' => [
-        'production'
+        'production',
+        'local',
     ],
 
     /*
@@ -42,5 +43,27 @@ return [
      * Use minimal frontend mode
      */
     'minimal_frontend' => env('MINIMAL_FRONTEND', true),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Server setting
+    |--------------------------------------------------------------------------
+    |
+    | This setting allows you to change the server.
+    |
+    */
+
+    'server' => env('LB_SERVER', 'https://larabug.test/api/log'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Verify SSL setting
+    |--------------------------------------------------------------------------
+    |
+    | Enables / disables the SSL verification when sending exceptions to LaraBug
+    | Never turn SSL verification off on production instances
+    |
+    */
+    'verify_ssl' => env('LB_VERIFY_SSL', false),
 
 ];
