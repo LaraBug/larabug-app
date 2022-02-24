@@ -3,6 +3,7 @@
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\GroupController;
+use App\Http\Controllers\IssuesController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\ExceptionController;
@@ -56,6 +57,8 @@ Route::middleware('auth')->prefix('panel')->name('panel.')->group(function () {
     Route::get('projects/{id}/feedback-installation', [ProjectController::class, 'feedbackInstallation'])->name('projects.feedback-installation');
     Route::post('projects/{id}/test-webhook', [ProjectController::class, 'testWebhook'])->name('projects.test.webhook');
     Route::post('projects/{id}/remove-image', [ProjectController::class, 'removeImage'])->name('projects.remove.image');
+
+    Route::resource('issues', IssuesController::class);
 
     Route::resource('groups', GroupController::class);
 

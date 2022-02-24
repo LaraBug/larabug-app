@@ -10,10 +10,12 @@ class IssuesController extends Controller
     public function index()
     {
         $issues = Issue::whereHas('project', function ($q) {
-            $q->where('user_id', auth()->user()->id);
+            $q->whereHas('users', function ($qu) {
+                $qu->where('user_id', auth()->user()->id);
+            });
         })
             ->filter(request()->only('search'))
-            ->lastest('last_exception_at')
+            ->latest('last_exception_at')
             ->paginate();
 
         return inertia('Issues/Index', [
