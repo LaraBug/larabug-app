@@ -2,66 +2,60 @@
 
 namespace App\Filament\Resources;
 
-use Filament\Resources\Resource;
-use Filament\Resources\Forms\Form;
-use Filament\Forms\Components\Grid;
-use Filament\Resources\Tables\Table;
-use Filament\Resources\Tables\Columns;
-use Filament\Resources\Forms\Components;
 use App\Filament\Resources\UserResource\Pages;
-use App\Filament\Resources\Forms\Components\Abilities;
+use App\Forms\Components\Abilities;
+use Filament\Forms\Components;
+use Filament\Forms\Components\Grid;
+use Filament\Resources\Form;
+use Filament\Resources\Resource;
+use Filament\Resources\Table;
+use Filament\Tables\Columns;
 
 class UserResource extends Resource
 {
-    public static $icon = 'heroicon-o-users';
+    protected static ?string $navigationIcon = 'heroicon-o-users';
 
-    public static function form(Form $form)
+    public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Components\TextInput::make('name')->autofocus()->required(),
-                Grid::make([
-                    Components\Checkbox::make('is_admin'),
-                ])->columns(2),
-
-                Components\Tabs::make('Test')
-                    ->tabs([
-                        Components\Tab::make(
-                            'Abilities',
-                            [
-                                Abilities::make('abilities')->label(false),
-                            ],
-                        ),
+                Grid::make()
+                    ->schema([
+                        Components\Checkbox::make('is_admin'),
                     ]),
+
+                Components\MultiSelect::make('abilities')
+                    ->options(config('auth.abilities')),
             ]);
     }
 
-    public static function table(Table $table)
+    public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                Columns\Text::make('name')->searchable()->primary(),
-                Columns\Text::make('email')->searchable(),
-                Columns\Text::make('created_at')->label('Registered at')->sortable(),
-                Columns\Boolean::make('is_admin'),
+                Columns\TextColumn::make('name')->searchable(),
+                Columns\TextColumn::make('email')->searchable(),
+                Columns\TextColumn::make('created_at')->label('Registered at')->sortable(),
+                Columns\BooleanColumn::make('is_admin'),
             ])
             ->filters([
             ]);
     }
 
-    public static function relations()
+    public static function getRelations(): array
     {
         return [
             //
         ];
     }
 
-    public static function routes()
+    public static function getPages(): array
     {
         return [
-            Pages\ListUsers::routeTo('/', 'index'),
-            Pages\CreateUser::routeTo('/create', 'create'),
-            Pages\EditUser::routeTo('/{record}/edit', 'edit'),
+            'index' => Pages\ListUsers::route('/'),
+            'create' => Pages\CreateUser::route('/create'),
+            'edit' => Pages\EditUser::route('/{record}/edit'),
         ];
     }
 }

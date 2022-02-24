@@ -43,7 +43,7 @@
                     <a href="{{ route('branding') }}">Branding</a>
                 </li>
                 <li class="mt-1">
-                    <a href="https://github.com/LaraBug" target="github">Github</a>
+                    <a href="https://github.com/LaraBug" target="github">GitHub</a>
                 </li>
                 <li class="mt-1">
                     <a href="https://twitter.com/larabugEN" target="larabug-twitter">Twitter</a>

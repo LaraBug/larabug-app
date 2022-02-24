@@ -7,5 +7,5 @@ use Filament\Resources\Pages\ListRecords;
 
 class ListUsers extends ListRecords
 {
-    public static $resource = UserResource::class;
+    protected static string $resource = UserResource::class;
 }

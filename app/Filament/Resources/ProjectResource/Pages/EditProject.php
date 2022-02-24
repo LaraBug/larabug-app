@@ -7,5 +7,5 @@ use App\Filament\Resources\ProjectResource;
 
 class EditProject extends EditRecord
 {
-    public static $resource = ProjectResource::class;
+    protected static string $resource = ProjectResource::class;
 }

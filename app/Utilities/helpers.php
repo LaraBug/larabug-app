@@ -14,7 +14,7 @@ function carbon($time = null, $tz = null)
     return app(\Carbon\Carbon::class, [$time, $tz]);
 }
 
-function money($value, $prefix = true)
+function format_euros($value, $prefix = true)
 {
     return ($prefix ? '€' : '') . number_format($value, 2, ',', '');
 }

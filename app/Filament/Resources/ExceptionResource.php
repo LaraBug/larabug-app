@@ -3,48 +3,53 @@
 namespace App\Filament\Resources;
 
 use Filament\Resources\Resource;
-use Filament\Resources\Forms\Form;
-use Filament\Resources\Tables\Table;
-use Filament\Resources\Tables\Columns;
-use Filament\Resources\Forms\Components;
+use Filament\Resources\Form;
+use Filament\Resources\Table;
+use Filament\Tables\Columns;
+use Filament\Forms\Components;
 use App\Filament\Resources\ExceptionResource\Pages;
 
 class ExceptionResource extends Resource
 {
-    public static $icon = 'heroicon-o-fire';
+    protected static ?string $navigationIcon = 'heroicon-o-fire';
 
-    public static function form(Form $form)
+    public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Components\TextInput::make('Exception')->autofocus()->required(),
+                Components\TextInput::make('exception')->autofocus()->required(),
+                Components\BelongsToSelect::make('project_id')
+                    ->relationship('project', 'title')
+                    ->searchable()
+                    ->required(),
             ]);
     }
 
-    public static function table(Table $table)
+    public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                Columns\Text::make('exception')
+                Columns\TextColumn::make('exception'),
+                Columns\TextColumn::make('project.title'),
             ])
             ->filters([
                 //
             ]);
     }
 
-    public static function relations()
+    public static function getRelations(): array
     {
         return [
             //
         ];
     }
 
-    public static function routes()
+    public static function getPages(): array
     {
         return [
-            Pages\ListExceptions::routeTo('/', 'index'),
-            Pages\CreateException::routeTo('/create', 'create'),
-            Pages\EditException::routeTo('/{record}/edit', 'edit'),
+            'index' => Pages\ListExceptions::route('/'),
+            'create' => Pages\CreateException::route('/create'),
+            'edit' => Pages\EditException::route('/{record}/edit'),
         ];
     }
 }

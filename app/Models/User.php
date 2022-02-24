@@ -6,7 +6,6 @@ use App\Traits\Planable;
 use App\Mail\User\WelcomeEmail;
 use Illuminate\Notifications\Notifiable;
 use Filament\Models\Contracts\FilamentUser;
-use Filament\Models\Concerns\IsFilamentUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -20,10 +19,10 @@ class User extends Authenticatable implements FilamentUser
 {
     use Notifiable,
         Planable,
-        HasFactory,
-        IsFilamentUser;
+        HasFactory;
 
     protected $fillable = [
+        'abilities',
         'name',
         'email',
         'password',
@@ -208,5 +207,10 @@ class User extends Authenticatable implements FilamentUser
     public function hasAbility($key)
     {
         return isset($this->abilities[$key]) && $this->abilities[$key];
+    }
+
+    public function canAccessFilament(): bool
+    {
+        return $this->isAdmin();
     }
 }

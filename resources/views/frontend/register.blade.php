@@ -78,7 +78,7 @@
                     started
                 </button>
 
-                <a class="text-primary-500 mr-4 border-r pr-5" href="{{ route('socialite.login', 'github') }}">Github Login</a>
+                <a class="text-primary-500 mr-4 border-r pr-5" href="{{ route('socialite.login', 'github') }}">GitHub Login</a>
                 <a class="text-primary-500" href="{{ route('login') }}">Login</a>
             </form>
         </article>

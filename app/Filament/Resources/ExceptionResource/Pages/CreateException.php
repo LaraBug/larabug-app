@@ -7,5 +7,5 @@ use App\Filament\Resources\ExceptionResource;
 
 class CreateException extends CreateRecord
 {
-    public static $resource = ExceptionResource::class;
+    protected static string $resource = ExceptionResource::class;
 }

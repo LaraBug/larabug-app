@@ -7,5 +7,5 @@ use App\Filament\Resources\ProjectResource;
 
 class ListProjects extends ListRecords
 {
-    public static $resource = ProjectResource::class;
+    protected static string $resource = ProjectResource::class;
 }

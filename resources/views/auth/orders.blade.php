@@ -40,7 +40,7 @@
                                         </td>
                                         <td>{{ $order->description }}</td>
                                         <td>{{ $order->success ? 'Paid' : 'Not paid' }}</td>
-                                        <td>{{ money($order->amount) }}</td>
+                                        <td>{{ format_euros($order->amount) }}</td>
                                         <td>{{ $order->created_at->format('Y-m-d') }}</td>
                                     </tr>
                                 @endforeach

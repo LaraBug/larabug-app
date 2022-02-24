@@ -3,17 +3,17 @@
 namespace App\Filament\Resources;
 
 use Filament\Resources\Resource;
-use Filament\Resources\Forms\Form;
-use Filament\Resources\Tables\Table;
-use Filament\Resources\Tables\Columns;
-use Filament\Resources\Forms\Components;
+use Filament\Resources\Form;
+use Filament\Resources\Table;
+use Filament\Tables\Columns;
+use Filament\Forms\Components;
 use App\Filament\Resources\ProjectResource\Pages;
 
 class ProjectResource extends Resource
 {
-    public static $icon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-collection';
 
-    public static function form(Form $form)
+    public static function form(Form $form): Form
     {
         return $form
             ->schema([
@@ -21,31 +21,31 @@ class ProjectResource extends Resource
             ]);
     }
 
-    public static function table(Table $table)
+    public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                Columns\Text::make('title')->searchable(),
-                Columns\Text::make('created_at')->sortable(),
+                Columns\TextColumn::make('title')->searchable(),
+                Columns\TextColumn::make('created_at')->sortable(),
             ])
             ->filters([
                 //
             ]);
     }
 
-    public static function relations()
+    public static function getRelations(): array
     {
         return [
             //
         ];
     }
 
-    public static function routes()
+    public static function getPages(): array
     {
         return [
-            Pages\ListProjects::routeTo('/', 'index'),
-            Pages\CreateProject::routeTo('/create', 'create'),
-            Pages\EditProject::routeTo('/{record}/edit', 'edit'),
+            'index' => Pages\ListProjects::route('/'),
+            'create' => Pages\CreateProject::route('/create'),
+            'edit' => Pages\EditProject::route('/{record}/edit'),
         ];
     }
 }

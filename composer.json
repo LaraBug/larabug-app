@@ -13,7 +13,7 @@
     "coconutcraig/laravel-postmark": "^2.9",
     "cviebrock/eloquent-sluggable": "^8.0.1",
     "fideloper/proxy": "^4.2",
-    "filament/filament": "^v1.12.0",
+    "filament/filament": "^2.5",
     "fruitcake/laravel-cors": "^2.0",
     "google/recaptcha": "~1.1",
     "guzzlehttp/guzzle": "^7.3",
