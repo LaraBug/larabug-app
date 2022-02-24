@@ -61,8 +61,8 @@
                     Projects
                 </NavListItem>
 
-                <NavListItem @click="open = false" href="/panel/projects"
-                             :is-active="route().current('panel.projects.*')" :isopen="open">
+                <NavListItem @click="open = false" href="/panel/issues"
+                             :is-active="route().current('panel.issues.*')" :isopen="open">
                   <template #icon>
                     <svg
                         class="w-6 h-6 text-primary-400"
