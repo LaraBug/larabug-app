@@ -73,7 +73,9 @@ class LoginController extends Controller
             ]);
         }
 
-        return Socialite::driver($provider)->redirect();
+        return Socialite::driver($provider)
+            ->setScopes(config("services.{$provider}.scopes", []))
+            ->redirect();
     }
 
     /**
@@ -134,6 +136,7 @@ class LoginController extends Controller
             $socialUser = $user->social_users()->create([
                 'provider' => $provider,
                 'provider_id' => $social->getId(),
+                'access_token' => $social->token,
             ]);
         }
 

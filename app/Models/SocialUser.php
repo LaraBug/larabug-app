@@ -8,7 +8,12 @@ class SocialUser extends Model
 {
     protected $fillable = [
         'provider',
-        'provider_id'
+        'provider_id',
+        'access_token',
+    ];
+
+    protected $casts = [
+        'access_token' => 'encrypted',
     ];
 
     public function user()

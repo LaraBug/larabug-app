@@ -181,6 +181,14 @@ class User extends Authenticatable implements FilamentUser
         return $this->hasMany(SocialUser::class)->latest();
     }
 
+    public function getGithubTokenAttribute(): string|null
+    {
+        $socialUser = $this->social_users()
+            ->firstWhere('provider', 'github');
+
+        return $socialUser?->access_token;
+    }
+
     public static function boot()
     {
         parent::boot();

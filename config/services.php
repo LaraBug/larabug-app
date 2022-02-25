@@ -35,6 +35,12 @@ return [
         'client_secret' => env('GITHUB_SECRET'),
         'redirect' => env('GITHUB_CALLBACK'),
         'token' => env('GITHUB_TOKEN'),
+        'scopes' => [
+            'read:user',
+            'user:email',
+            'repo',
+            'admin:repo_hook',
+        ],
     ],
 
     'facebook' => [
