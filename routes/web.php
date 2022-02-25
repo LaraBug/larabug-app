@@ -90,3 +90,5 @@ Route::middleware('auth')->prefix('panel')->name('panel.')->group(function () {
         });
     });
 });
+
+Route::post('github-webhook', \App\Http\Controllers\GithubWebhookController::class);

@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Kblais\Uuid\Uuid;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Issue extends Model
 {
@@ -28,6 +28,11 @@ class Issue extends Model
     public function exceptions(): HasMany
     {
         return $this->hasMany(Exception::class);
+    }
+
+    public function first_exception(): BelongsTo
+    {
+        return $this->belongsTo(Exception::class, 'exception_id');
     }
 
     public function project(): BelongsTo

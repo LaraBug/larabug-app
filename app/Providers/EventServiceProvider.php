@@ -5,8 +5,10 @@ namespace App\Providers;
 use App\Models\Exception;
 use App\Listeners\UpdateLoginData;
 use App\Events\ExceptionWasCreated;
+use App\Models\Issue;
 use App\Models\Project;
 use App\Observers\ExceptionObserver;
+use App\Observers\IssueObserver;
 use App\Observers\ProjectObserver;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
@@ -36,6 +38,7 @@ class EventServiceProvider extends ServiceProvider
     {
         parent::boot();
 
+        Issue::observe(IssueObserver::class);
         Project::observe(ProjectObserver::class);
         Exception::observe(ExceptionObserver::class);
     }
