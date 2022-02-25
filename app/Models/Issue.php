@@ -11,6 +11,10 @@ class Issue extends Model
 {
     use Uuid;
 
+    protected $appends = [
+        'exceptions_count',
+    ];
+
     protected $guarded = [
         'id',
         'updated_at',
@@ -38,5 +42,10 @@ class Issue extends Model
                 $query->where('exception', 'like', '%' . $search . '%');
             });
         });
+    }
+
+    public function getExceptionsCountAttribute(): int
+    {
+        return $this->exceptions()->count();
     }
 }

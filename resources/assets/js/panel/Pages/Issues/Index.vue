@@ -27,7 +27,7 @@
 
             <div class="flex-1">
               <p class="font-medium text-bold">{{ issue.exception }}</p>
-<!--              <p class="text-sm text-gray-600">{{ project.unread_exceptions_count }} unread exceptions &centerdot; {{  project.total_exceptions }} total exceptions</p>-->
+              <p class="text-sm text-gray-600">{{ issue.exceptions_count }} total exceptions</p>
             </div>
 
             <svg
