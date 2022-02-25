@@ -4,6 +4,10 @@ namespace App\Models;
 
 use App\Traits\Planable;
 use App\Mail\User\WelcomeEmail;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Notifications\Notifiable;
 use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -133,49 +137,54 @@ class User extends Authenticatable implements FilamentUser
         return $query->whereNotNull('plan_expires_at');
     }
 
-    public function newsletters()
+    public function fcmTokens(): HasMany
+    {
+        return $this->hasMany(UserFcmToken::class);
+    }
+
+    public function issues(): HasManyThrough
+    {
+        return $this->hasManyThrough(Issue::class, Project::class);
+    }
+
+    public function newsletters(): BelongsToMany
     {
         return $this->belongsToMany(Newsletter::class)->latest();
     }
 
-    public function plan()
-    {
-        return $this->belongsTo(Plan::class);
-    }
-
-    public function orders()
+    public function orders(): HasMany
     {
         return $this->hasMany(Order::class);
     }
 
-    public function ordersLatest()
+    public function ordersLatest(): HasMany
     {
         return $this->hasMany(Order::class)->latest();
     }
 
-    public function projects()
+    public function plan(): BelongsTo
+    {
+        return $this->belongsTo(Plan::class);
+    }
+
+    public function projects(): BelongsToMany
     {
         return $this->belongsToMany(Project::class)->withPivot('owner');
     }
 
-    public function projectGroups()
+    public function projectGroups(): HasMany
     {
         return $this->hasMany(ProjectGroup::class);
     }
 
-    public function social_users()
+    public function social_users(): HasMany
     {
         return $this->hasMany(SocialUser::class);
     }
 
-    public function socialUsersLatest()
+    public function socialUsersLatest(): HasMany
     {
         return $this->hasMany(SocialUser::class)->latest();
-    }
-
-    public function fcmTokens()
-    {
-        return $this->hasMany(UserFcmToken::class);
     }
 
     public static function boot()
