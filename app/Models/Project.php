@@ -48,6 +48,9 @@ class Project extends Model implements HasMedia
         'slack_webhook_enabled',
         'discord_webhook_enabled',
         'custom_webhook_enabled',
+        'github_repo_id',
+        'github_webhook_id',
+        'github_issues_enabled',
     ];
 
     protected $dates = [
@@ -63,6 +66,7 @@ class Project extends Model implements HasMedia
         'slack_webhook_enabled' => 'boolean',
         'discord_webhook_enabled' => 'boolean',
         'custom_webhook_enabled' => 'boolean',
+        'github_issues_enabled' => 'boolean',
     ];
 
     protected $appends = [
