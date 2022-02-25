@@ -2,11 +2,14 @@
 
 namespace App\Observers;
 
+use App\Jobs\Projects\CheckGithubWebhookJob;
+use App\Models\Project;
+
 class ProjectObserver
 {
-    public function updated()
+    public function saved(Project $project)
     {
-        // If there is a GitHub repo linked, check if there is a webhook
+        CheckGithubWebhookJob::dispatchIf($project->github_issues_enabled, $project);
     }
 
     public function deleted()

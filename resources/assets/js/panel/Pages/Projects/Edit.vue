@@ -38,6 +38,33 @@
                     <FormTextareaGroup v-model="form.description" label="Description" id="description"/>
                 </div>
 
+                <div class="sm:col-span-6 border-t pt-4">
+                    <div class="-ml-4 -mt-2 flex items-center justify-between">
+                        <div class="ml-4 mt-2">
+                            <h2 class="text-xl font-medium text-blue-gray-900">GitHub integration</h2>
+                            <p class="mt-1 text-sm text-blue-gray-500">Here you can change the GitHub integration settings for this project.</p>
+                        </div>
+                        <div class="ml-4 mt-2 flex-shrink-0">
+                            <input
+                                :class="[
+                'text-primary-600 rounded border-gray-300 transition',
+                'focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-offset-0',
+              ]"
+                                id="github_issues_enabled"
+                                type="checkbox"
+                                v-model="form.github_issues_enabled" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-4 space-y-4" :class="{'opacity-25': !form.github_issues_enabled}">
+                    <FormInputGroup
+                        v-model="form.github_repo_id"
+                        :error="form.errors.github_repo_id"
+                        label="GitHub repo id"
+                        id="github_repo_id"
+                    />
+                </div>
 
                 <div class="sm:col-span-6 border-t pt-4">
                     <div class="-ml-4 -mt-2 flex items-center justify-between">
@@ -217,6 +244,8 @@ export default {
                 custom_webhook_enabled: this.project.custom_webhook_enabled,
                 notifications_enabled: this.project.notifications_enabled,
                 mobile_notifications_enabled: this.project.mobile_notifications_enabled,
+                github_issues_enabled: this.project.github_issues_enabled,
+                github_repo_id: this.project.github_repo_id,
             }),
         }
     },
