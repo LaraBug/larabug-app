@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Kblais\Uuid\Uuid;
 use EloquentFilter\Filterable;
 use Spatie\MediaLibrary\HasMedia;
@@ -153,6 +154,11 @@ class Project extends Model implements HasMedia
     public function group()
     {
         return $this->belongsTo(\App\Models\ProjectGroup::class);
+    }
+
+    public function issues(): HasMany
+    {
+        return $this->hasMany(Issue::class);
     }
 
     public function exceptions()

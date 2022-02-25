@@ -9,7 +9,11 @@ class IssuesController extends Controller
 {
     public function index()
     {
-        $issues = auth()->user()->issues()
+        $issues = Issue::whereHas('project', function ($q) {
+            $q->whereHas('users', function ($qu) {
+                $qu->where('user_id', auth()->user()->id);
+            });
+        })
             ->filter(request()->only('search'))
             ->latest('last_exception_at')
             ->paginate();
