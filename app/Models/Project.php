@@ -48,6 +48,7 @@ class Project extends Model implements HasMedia
         'slack_webhook_enabled',
         'discord_webhook_enabled',
         'custom_webhook_enabled',
+        'github_repo',
         'github_repo_id',
         'github_webhook_id',
         'github_issues_enabled',

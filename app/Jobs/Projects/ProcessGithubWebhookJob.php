@@ -33,8 +33,6 @@ class ProcessGithubWebhookJob implements ShouldQueue
         if ($this->event === 'issues' && $this->payload['action'] === 'reopened') {
             $this->updateIssueStatus('open');
         }
-
-        ray($this);
     }
 
     protected function updateIssueStatus(string $status): void

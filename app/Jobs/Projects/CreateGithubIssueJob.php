@@ -36,6 +36,7 @@ class CreateGithubIssueJob implements ShouldQueue
         $data = $response->json();
 
         $this->issue->github_issue_id = $data['id'];
+        $this->issue->github_issue_url = $data['html_url'];
 
         $this->issue->saveQuietly();
     }
@@ -44,9 +45,10 @@ class CreateGithubIssueJob implements ShouldQueue
     {
         $larabugUrl = url('/panel/issues/' . $this->issue->id);
 
-        $body = '## Stacktrace' . PHP_EOL;
-        $body.= "```bash" . PHP_EOL;
-        $body.= $this->issue->first_exception->error . PHP_EOL;
+        $body = "# {$this->issue->exception}" . PHP_EOL;
+        $body.= '## Exception' . PHP_EOL;
+        $body.= "```php" . PHP_EOL;
+        $body.= $this->issue->first_exception->executor_output . PHP_EOL;
         $body.= '```' . PHP_EOL;
         $body.= '---' . PHP_EOL;
         $body.= "[View on LaraBug]({$larabugUrl})" . PHP_EOL;

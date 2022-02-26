@@ -59,10 +59,11 @@
 
                 <div class="mt-4 space-y-4" :class="{'opacity-25': !form.github_issues_enabled}">
                     <FormInputGroup
-                        v-model="form.github_repo_id"
-                        :error="form.errors.github_repo_id"
-                        label="GitHub repo id"
+                        v-model="form.github_repo"
+                        :error="form.errors.github_repo"
+                        label="GitHub repository"
                         id="github_repo_id"
+                        helper-text="E.g. larabug/larabug"
                     />
                 </div>
 
@@ -245,7 +246,7 @@ export default {
                 notifications_enabled: this.project.notifications_enabled,
                 mobile_notifications_enabled: this.project.mobile_notifications_enabled,
                 github_issues_enabled: this.project.github_issues_enabled,
-                github_repo_id: this.project.github_repo_id,
+                github_repo: this.project.github_repo,
             }),
         }
     },
