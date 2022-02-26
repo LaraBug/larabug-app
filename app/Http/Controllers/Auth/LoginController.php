@@ -142,6 +142,9 @@ class LoginController extends Controller
 
         if (!auth()->check()) {
             auth()->guard()->login($user);
+        } else {
+            $providerName = config("services.{$provider}.label");
+            return redirect()->route('panel.profile.show')->with('success', "{$providerName} linked!");
         }
 
         return $this->sendLoginResponse($request);

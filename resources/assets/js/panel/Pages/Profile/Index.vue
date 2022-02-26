@@ -124,6 +124,30 @@
             </form>
         </Card>
 
+        <Card contained>
+          <template #header>
+            <h2 class="text-xl font-bold">GitHub integration</h2>
+          </template>
+
+          <form action="">
+            <div class="space-y-6" v-if="!user.github_linked">
+              <p>If you want to sync LaraBug issues with your GitHub repositories, you need to link your GitHub account by logging in with the button below.</p>
+
+              <div class="flex items-center space-x-2">
+                <Button as="inertia-link" @click="linkGithub" :href="route('panel.profile.fcm-tokens.index')" primary>Link GitHub account</Button>
+              </div>
+            </div>
+
+            <div class="space-y-6" v-if="user.github_linked">
+              <p>Your LaraBug account is linked to your GitHub account. You can now sync LaraBug issues with GitHub.</p>
+
+              <div class="flex items-center space-x-2">
+                <Button as="inertia-link" @click="unlinkGithub" danger>Unlink GitHub account</Button>
+              </div>
+            </div>
+          </form>
+        </Card>
+
         <div>
             <Button secondary @click="logout">Logout</Button>
         </div>
@@ -209,7 +233,15 @@ export default {
 
         logout() {
             this.$inertia.post(this.route('logout'));
-        }
+        },
+
+        unlinkGithub() {
+            this.$inertia.post(this.route('panel.profile.unlink-github'));
+        },
+
+        linkGithub() {
+            this.$inertia.post(this.route('panel.profile.link-github'));
+        },
     },
 
     setup() {

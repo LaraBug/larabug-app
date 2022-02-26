@@ -10,6 +10,7 @@ use App\Http\Controllers\ExceptionController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DocumentationController;
 use App\Http\Controllers\Profile\ProfileController;
+use App\Http\Controllers\Profile\GithubIntegrationController;
 
 Route::permanentRedirect('terms', 'terms-of-service');
 Route::permanentRedirect('privacy', 'privacy-policy');
@@ -88,6 +89,12 @@ Route::middleware('auth')->prefix('panel')->name('panel.')->group(function () {
             Route::get('/', [\App\Http\Controllers\Profile\FcmController::class, 'index'])->name('profile.fcm-tokens.index');
             Route::delete('{id}', [\App\Http\Controllers\Profile\FcmController::class, 'destroy'])->name('profile.fcm-tokens.destroy');
         });
+
+        Route::post('/link-github', [GithubIntegrationController::class, 'link'])
+            ->name('profile.link-github');
+
+        Route::post('/unlink-github', [GithubIntegrationController::class, 'unlink'])
+            ->name('profile.unlink-github');
     });
 });
 

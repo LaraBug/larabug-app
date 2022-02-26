@@ -31,6 +31,7 @@ return [
     ],
 
     'github' => [
+        'label' => 'GitHub',
         'client_id' => env('GITHUB_ID'),
         'client_secret' => env('GITHUB_SECRET'),
         'redirect' => env('GITHUB_CALLBACK'),
@@ -44,6 +45,7 @@ return [
     ],
 
     'facebook' => [
+        'label' => 'Facebook',
         'client_id' => env('FACEBOOK_ID'),
         'client_secret' => env('FACEBOOK_SECRET'),
         'redirect' => env('APP_URL') . '/login/facebook/callback',
@@ -55,6 +57,7 @@ return [
     ],
 
     'ploi' => [
+        'label' => 'Ploi',
         'client_id' => env('PLOI_CLIENT_ID'),
         'client_secret' => env('PLOI_CLIENT_SECRET'),
         'redirect' => env('PLOI_CALLBACK')

@@ -59,7 +59,8 @@ class User extends Authenticatable implements FilamentUser
 
     protected $appends = [
         'first_name',
-        'settings'
+        'settings',
+        'github_linked',
     ];
 
     public static $filamentUserColumn = 'is_admin';
@@ -187,6 +188,12 @@ class User extends Authenticatable implements FilamentUser
             ->firstWhere('provider', 'github');
 
         return $socialUser?->access_token;
+    }
+
+    public function getGithubLinkedAttribute(): bool
+    {
+        return (bool) $socialUser = $this->social_users()
+            ->firstWhere('provider', 'github');
     }
 
     public static function boot()
