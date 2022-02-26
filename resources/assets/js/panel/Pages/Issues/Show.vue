@@ -80,6 +80,9 @@
           <span class="text-sm font-medium">Exception</span>
         </p>
         <p class="text-xl">{{ exception.exception }}</p>
+        <div class="flex space-x-2 mt-3">
+          <Badge v-for="label in issue.labels" :color="label.color">{{ label.name }}</Badge>
+        </div>
       </div>
 
       <div class="bg-white">
@@ -226,10 +229,13 @@ import Button from "../../Components/Button";
 import SplitContainer from "../../Components/SplitContainer";
 import SidebarItem from "../../Components/SidebarItem";
 import Prism from "../../../plugins/prism";
+import Badge from "../../Components/Badge";
 
 export default {
   name: "Show",
-  components: {SidebarItem, SplitContainer, Button, Toolbar, BreadcrumbsDivider, BreadcrumbsItem, Breadcrumbs, Header,},
+  components: {
+    Badge,
+    SidebarItem, SplitContainer, Button, Toolbar, BreadcrumbsDivider, BreadcrumbsItem, Breadcrumbs, Header,},
   layout: MinimalLayout,
   props: {
     issue: {},

@@ -24,6 +24,7 @@ class Issue extends Model
 
     protected $casts = [
         'last_exception_at' => 'datetime',
+        'labels' => 'json',
     ];
 
     public function exceptions(): HasMany
