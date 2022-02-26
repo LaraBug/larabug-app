@@ -253,8 +253,6 @@
 </template>
 
 <script>
-import ExceptionLayout from '@/Layouts/ExceptionLayout'
-
 import Breadcrumbs from '@/Components/Breadcrumbs'
 import BreadcrumbsItem from '@/Components/BreadcrumbsItem'
 import BreadcrumbsDivider from '@/Components/BreadcrumbsDivider'
@@ -267,10 +265,11 @@ import Code from '@/Components/Code'
 import Prism from '../../../plugins/prism';
 import Dropdown from "../../Components/Dropdown";
 import DropdownOption from "../../Components/DropdownOption";
+import MinimalLayout from "../../Layouts/MinimalLayout";
 
 export default {
 
-    layout: ExceptionLayout,
+    layout: MinimalLayout,
     components: {
       DropdownOption,
       Dropdown,

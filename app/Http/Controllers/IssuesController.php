@@ -28,7 +28,7 @@ class IssuesController extends Controller
     {
         $issue = Issue::find($id);
 
-        abort_unless($issue->project->user->is(auth()->user()), 403);
+        abort_unless($issue->project->users->contains(auth()->user()), 403);
 
         $exception = $issue->exceptions()
             ->orderBy('created_at', 'DESC')

@@ -13,6 +13,7 @@ class Issue extends Model
 
     protected $appends = [
         'exceptions_count',
+        'affected_versions',
     ];
 
     protected $guarded = [
@@ -52,6 +53,16 @@ class Issue extends Model
                 $query->where('exception', 'like', '%' . $search . '%');
             });
         });
+    }
+
+    public function getAffectedVersionsAttribute()
+    {
+        $versions = $this->exceptions()
+            ->distinct('project_version')
+            ->pluck('project_version')
+            ->toArray();
+
+        return implode(', ', $versions);
     }
 
     public function getExceptionsCountAttribute(): int
