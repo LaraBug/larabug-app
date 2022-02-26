@@ -22,7 +22,7 @@ class Issue extends Model
     ];
 
     protected $casts = [
-        'last_exception_at' => 'date',
+        'last_exception_at' => 'datetime',
     ];
 
     public function exceptions(): HasMany
@@ -38,6 +38,11 @@ class Issue extends Model
     public function project(): BelongsTo
     {
         return $this->belongsTo(Project::class);
+    }
+
+    protected function serializeDate(\DateTimeInterface $date)
+    {
+        return $date->format('Y-m-d H:i:s');
     }
 
     public function scopeFilter($query, array $filters)

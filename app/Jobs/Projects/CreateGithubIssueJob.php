@@ -4,11 +4,11 @@ namespace App\Jobs\Projects;
 
 use App\Models\Issue;
 use Illuminate\Bus\Queueable;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Http;
 
 class CreateGithubIssueJob implements ShouldQueue
 {

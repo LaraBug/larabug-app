@@ -27,7 +27,7 @@
 
             <div class="flex-1">
               <p class="font-medium text-bold">{{ issue.exception }}</p>
-              <p class="text-sm text-gray-600">{{ issue.exceptions_count }} total exceptions</p>
+              <p class="text-sm text-gray-600">{{ issue.exceptions_count }} total exceptions &centerdot; {{  issue.last_exception_at }} last occurrence</p>
             </div>
 
             <svg
