@@ -1,15 +1,15 @@
 <?php
 
-use App\Models\Project;
 use App\Models\User;
-use App\Notifications\Discord\DiscordChannel;
-use App\Notifications\ExceptionWasCreated;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Notification;
-use NotificationChannels\Fcm\FcmChannel;
-use NotificationChannels\Webhook\WebhookChannel;
-
+use App\Models\Project;
 use function Pest\Laravel\be;
+use Illuminate\Support\Facades\Mail;
+use NotificationChannels\Fcm\FcmChannel;
+use App\Notifications\ExceptionWasCreated;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\Discord\DiscordChannel;
+
+use NotificationChannels\Webhook\WebhookChannel;
 
 beforeEach(function () {
     Notification::fake();
@@ -84,7 +84,8 @@ it('logs an exception and sends notification to discord', function () {
 });
 
 it('logs an exception and sends notification to custom webhook', function () {
-    $this->project->update(['custom_webhook_enabled' => true, 'custom_webhook' => 'https://example.com/custom-webhook']
+    $this->project->update(
+        ['custom_webhook_enabled' => true, 'custom_webhook' => 'https://example.com/custom-webhook']
     );
 
     expect($this->project->exceptions)
@@ -152,13 +153,13 @@ it('logs an exception and sends notification to fcm', function () {
     );
 });
 
-it('logs an exception and sends multiple notifications', function ()
-{
+it('logs an exception and sends multiple notifications', function () {
     $this->user->fcmTokens()->create(['token' => 'test', 'device' => 'example']);
     $this->project->update(
         ['discord_webhook_enabled' => true, 'discord_webhook' => 'https://discordapp.com/api/webhooks']
     );
-    $this->project->update(['custom_webhook_enabled' => true, 'custom_webhook' => 'https://example.com/custom-webhook']
+    $this->project->update(
+        ['custom_webhook_enabled' => true, 'custom_webhook' => 'https://example.com/custom-webhook']
     );
     $this->project->update(['slack_webhook_enabled' => true, 'slack_webhook' => 'https://hooks.slack.com/services/']);
     $this->project->update(['mobile_notifications_enabled' => true]);
@@ -181,4 +182,3 @@ it('logs an exception and sends multiple notifications', function ()
         }
     );
 });
-

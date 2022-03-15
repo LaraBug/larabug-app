@@ -1,11 +1,11 @@
 <?php
 
-use App\Models\Exception;
-use App\Models\Project;
 use App\Models\User;
-use Illuminate\Support\Facades\Mail;
-
+use App\Models\Project;
+use App\Models\Exception;
 use function Pest\Laravel\post;
+
+use Illuminate\Support\Facades\Mail;
 use function Pest\Laravel\withoutExceptionHandling;
 
 beforeEach(function () {
@@ -29,4 +29,3 @@ it('adds feedback to an exception', function () {
         'feedback' => $this->faker->sentence,
     ])->assertOk();
 });
-

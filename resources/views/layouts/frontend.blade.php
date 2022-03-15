@@ -50,7 +50,7 @@
 
 <script src="{{ mix('js/frontend.js') }}"></script>
 
-@include('cookieConsent::index')
+@include('cookie-consent::index')
 
 @stack('scripts')
 

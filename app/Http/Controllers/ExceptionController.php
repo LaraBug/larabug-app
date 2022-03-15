@@ -88,7 +88,7 @@ class ExceptionController extends Controller
         /*
          * Return redirect back to save filter
          */
-        return redirect()->back();
+        return redirect()->route('panel.projects.show', $project->id)->with('success', 'Exception has been removed');
     }
 
     public function fixed($id, $exception)
@@ -210,6 +210,15 @@ class ExceptionController extends Controller
         $project->exceptions()->delete();
 
         return redirect()->route('panel.projects.show', $id)->with('success', 'All exceptions have been cleared up');
+    }
+
+    public function deleteFixed(Request $request, $id)
+    {
+        $project = $request->user()->projects()->findOrFail($id);
+
+        $project->exceptions()->where('status', Exception::FIXED)->delete();
+
+        return redirect()->route('panel.projects.show', $id)->with('success', 'All exceptions marked as fixed have been cleared up');
     }
 
     public function deleteSelected(Request $request, $id)

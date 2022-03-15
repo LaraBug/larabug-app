@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Facades\Mail;
 
 /**
  * @property mixed plan
@@ -205,7 +206,7 @@ class User extends Authenticatable implements FilamentUser
         });
 
         static::created(function ($user) {
-            \Mail::to($user)->send(new WelcomeEmail($user));
+            Mail::to($user)->send(new WelcomeEmail($user));
         });
 
         static::deleting(function (self $user) {

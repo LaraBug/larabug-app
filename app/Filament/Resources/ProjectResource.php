@@ -2,11 +2,11 @@
 
 namespace App\Filament\Resources;
 
-use Filament\Resources\Resource;
 use Filament\Resources\Form;
-use Filament\Resources\Table;
 use Filament\Tables\Columns;
+use Filament\Resources\Table;
 use Filament\Forms\Components;
+use Filament\Resources\Resource;
 use App\Filament\Resources\ProjectResource\Pages;
 
 class ProjectResource extends Resource

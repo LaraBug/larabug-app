@@ -21,7 +21,7 @@ return [
     ],
 
     'postmark' => [
-        'token' => env('POSTMARK_TOKEN'),
+        'token' => env('POSTMARK_SECRET'),
     ],
 
     'ses' => [
@@ -56,10 +56,7 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
-    'ploi' => [
-        'label' => 'Ploi',
-        'client_id' => env('PLOI_CLIENT_ID'),
-        'client_secret' => env('PLOI_CLIENT_SECRET'),
-        'redirect' => env('PLOI_CALLBACK')
+    'horizon' => [
+        'token' => env('HORIZON_TOKEN')
     ]
 ];

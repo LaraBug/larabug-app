@@ -241,7 +241,7 @@ export default {
 
         linkGithub() {
             this.$inertia.post(this.route('panel.profile.link-github'));
-        },
+        }
     },
 
     setup() {

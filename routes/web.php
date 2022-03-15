@@ -58,6 +58,7 @@ Route::middleware('auth')->prefix('panel')->name('panel.')->group(function () {
     Route::get('projects/{id}/feedback-installation', [ProjectController::class, 'feedbackInstallation'])->name('projects.feedback-installation');
     Route::post('projects/{id}/test-webhook', [ProjectController::class, 'testWebhook'])->name('projects.test.webhook');
     Route::post('projects/{id}/remove-image', [ProjectController::class, 'removeImage'])->name('projects.remove.image');
+    Route::post('projects/{id}/refresh-token', [ProjectController::class, 'refreshToken'])->name('projects.refresh-token');
 
     Route::resource('issues', IssuesController::class);
     Route::post('issues/{issue}/open', [IssuesController::class, 'open'])->name('issues.open');
@@ -67,6 +68,7 @@ Route::middleware('auth')->prefix('panel')->name('panel.')->group(function () {
 
     Route::delete('projects/{id}/exceptions/delete-all', [ExceptionController::class, 'deleteAll'])->name('exceptions.delete-all');
     Route::post('projects/{id}/exceptions/delete-selected', [ExceptionController::class, 'deleteSelected'])->name('exceptions.delete-selected');
+    Route::post('projects/{id}/exceptions/delete-fixed', [ExceptionController::class, 'deleteFixed'])->name('exceptions.delete-fixed');
     Route::resource('projects/{id}/exceptions', ExceptionController::class);
     Route::post('projects/{id}/exceptions/{exception}/fixed', [ExceptionController::class, 'fixed'])->name('exceptions.fixed');
     Route::post('projects/{id}/exceptions/{exception}/snooze', [ExceptionController::class, 'snooze'])->name('exceptions.snooze');

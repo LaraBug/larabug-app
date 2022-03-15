@@ -1,11 +1,11 @@
 <?php
 
-use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
+use Tests\CreatesApplication;
+use function Pest\Laravel\seed;
 use Illuminate\Foundation\Testing\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Tests\CreatesApplication;
 
-use function Pest\Laravel\seed;
+use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 
 uses(
     TestCase::class,
@@ -13,5 +13,5 @@ uses(
     LazilyRefreshDatabase::class,
     WithFaker::class
 )
-    ->beforeEach(fn() => seed(DatabaseSeeder::class))
+    ->beforeEach(fn () => seed(DatabaseSeeder::class))
     ->in(__DIR__);

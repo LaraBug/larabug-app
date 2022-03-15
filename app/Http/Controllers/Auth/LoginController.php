@@ -22,8 +22,7 @@ class LoginController extends Controller
     protected $redirectTo = '/panel';
 
     protected $supportedProviders = [
-        'github',
-        'ploi'
+        'github'
     ];
 
     public function showLoginForm()

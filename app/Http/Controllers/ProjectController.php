@@ -6,6 +6,7 @@ use App\Models\Project;
 use Illuminate\Http\Request;
 use App\Notifications\TestWebhook;
 use App\Http\Requests\ProjectRequest;
+use Illuminate\Support\Str;
 
 class ProjectController extends Controller
 {
@@ -188,5 +189,17 @@ class ProjectController extends Controller
 
         $project->group()->associate($group);
         $project->save();
+    }
+
+    public function refreshToken(Request $request, $id)
+    {
+        $project = $request->user()
+            ->projects()
+            ->findOrFail($id);
+
+        $project->key = Str::random(50);
+        $project->save();
+
+        return redirect()->back()->with('success', 'A new API token has been generated');
     }
 }

@@ -2,14 +2,13 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\UserResource\Pages;
-use App\Forms\Components\Abilities;
-use Filament\Forms\Components;
-use Filament\Forms\Components\Grid;
 use Filament\Resources\Form;
-use Filament\Resources\Resource;
-use Filament\Resources\Table;
 use Filament\Tables\Columns;
+use Filament\Resources\Table;
+use Filament\Forms\Components;
+use Filament\Resources\Resource;
+use Filament\Forms\Components\Grid;
+use App\Filament\Resources\UserResource\Pages;
 
 class UserResource extends Resource
 {

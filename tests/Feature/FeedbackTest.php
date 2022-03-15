@@ -2,8 +2,8 @@
 
 namespace Tests\Feature;
 
-use App\Models\Exception;
 use App\Models\Feedback;
+use App\Models\Exception;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
 
@@ -14,4 +14,3 @@ it('belongs to an exception', function () {
     expect(Feedback::factory()->create()->exception)
         ->toBeInstanceOf(Exception::class);
 });
-
