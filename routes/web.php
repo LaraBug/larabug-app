@@ -97,5 +97,3 @@ Route::middleware('auth')->prefix('panel')->name('panel.')->group(function () {
             ->name('profile.unlink-github');
     });
 });
-
-Route::post('github-webhook', \App\Http\Controllers\GithubWebhookController::class);
