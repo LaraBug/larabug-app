@@ -27,7 +27,8 @@ mix
     })
     .babelConfig({
         plugins: ['@babel/plugin-syntax-dynamic-import'],
-    });
+    })
+    .disableSuccessNotifications();
 
 if (mix.inProduction()) {
     mix.version();

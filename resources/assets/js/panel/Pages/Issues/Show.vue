@@ -102,18 +102,18 @@
       <div class="bg-white">
         <header class="flex items-center px-3">
           <button
-              class="h-12 px-3 text-xs font-medium uppercase border-b-2 rounded-none"
-              :class="[ tab === 'exception' ? 'border-primary-500 text-primary-600' : 'border-transparent text-gray-500']"
-              @click="tab = 'exception'"
-          >
-            First exception
-          </button>
-          <button
               class="h-12 px-3 text-xs font-medium text-gray-500 uppercase border-b-2 rounded-none"
               :class="[ tab === 'all-exceptions' ? 'border-primary-500 text-primary-600' : 'border-transparent text-gray-500']"
               @click="tab = 'all-exceptions'"
           >
             All exceptions
+          </button>
+          <button
+              class="h-12 px-3 text-xs font-medium uppercase border-b-2 rounded-none"
+              :class="[ tab === 'exception' ? 'border-primary-500 text-primary-600' : 'border-transparent text-gray-500']"
+              @click="tab = 'exception'"
+          >
+            First exception
           </button>
           <button
               class="h-12 px-3 text-xs font-medium text-gray-500 uppercase border-b-2 rounded-none"
@@ -322,7 +322,7 @@ export default {
   },
   data() {
     return {
-      tab: 'exception',
+      tab: 'all-exceptions',
       form: {
         search: null,
       },
@@ -334,7 +334,7 @@ export default {
   },
   methods: {
     changeStatus(status) {
-      console.log(status);
+
     },
     openUrl(url) {
       window.open(url, '_blank');
