@@ -50,7 +50,7 @@ class CheckJob implements ShouldQueue
                 'secret' => '1234567890',
                 'insecure_ssl' => '1',
             ],
-            'events' => ['issues', 'issue_comment', 'pull_request', 'commit_comment', 'push', 'release', 'create', 'delete'],
+            'events' => ['issues', 'issue_comment', 'pull_request', 'commit_comment', 'push', 'release', 'create', 'delete', 'labels'],
         ])->json();
 
         if (!isset($response['id'])) {

@@ -27,8 +27,6 @@ class ProcessJob implements ShouldQueue
 
     public function handle()
     {
-        ray($this->event, $this->payload);
-
         if ($this->event === 'issues' && $this->payload['action'] === 'closed') {
             // Find issue and close it
             $this->updateIssueStatus('closed');
