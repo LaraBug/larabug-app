@@ -27,7 +27,5 @@ class OpenJob implements ShouldQueue
             ->patch("repositories/{$repo}/issues/{$this->issue->github_issue_number}", [
                 'state' => 'open',
             ]);
-
-        ray($response);
     }
 }

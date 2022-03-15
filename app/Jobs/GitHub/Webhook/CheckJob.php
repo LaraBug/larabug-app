@@ -50,7 +50,12 @@ class CheckJob implements ShouldQueue
                 'secret' => '1234567890',
                 'insecure_ssl' => '1',
             ],
+            'events' => ['issues', 'issue_comment', 'pull_request', 'commit_comment', 'push', 'release', 'create', 'delete'],
         ])->json();
+
+        if (!isset($response['id'])) {
+            return false;
+        }
 
         $this->project->github_webhook_id = $response['id'];
         $this->project->saveQuietly();
