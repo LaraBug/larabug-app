@@ -26,11 +26,9 @@ class IssuesController extends Controller
         ]);
     }
 
-    public function show(Request $request, $id)
+    public function show(Request $request, Issue $issue)
     {
-        $issue = Issue::find($id);
-
-        abort_unless($issue->project->users->contains(auth()->user()), 403);
+        $this->authorize('view', $issue);
 
         $exception = $issue->exceptions()
             ->orderBy('created_at', 'DESC')
@@ -48,5 +46,27 @@ class IssuesController extends Controller
             'exceptions' => $exceptions,
             'project' => $issue->project,
         ]);
+    }
+
+    public function open(Issue $issue)
+    {
+        $this->authorize('view', $issue);
+
+        $issue->update([
+            'status' => 'open',
+        ]);
+
+        return redirect()->route('panel.issues.show', $issue->id)->with('success', 'Issue marked as open');
+    }
+
+    public function close(Issue $issue)
+    {
+        $this->authorize('view', $issue);
+
+        $issue->update([
+            'status' => 'closed',
+        ]);
+
+        return redirect()->route('panel.issues.show', $issue->id)->with('success', 'Issue marked as closed');
     }
 }

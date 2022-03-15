@@ -60,6 +60,8 @@ Route::middleware('auth')->prefix('panel')->name('panel.')->group(function () {
     Route::post('projects/{id}/remove-image', [ProjectController::class, 'removeImage'])->name('projects.remove.image');
 
     Route::resource('issues', IssuesController::class);
+    Route::post('issues/{issue}/open', [IssuesController::class, 'open'])->name('issues.open');
+    Route::post('issues/{issue}/close', [IssuesController::class, 'close'])->name('issues.close');
 
     Route::resource('groups', GroupController::class);
 

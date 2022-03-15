@@ -334,7 +334,11 @@ export default {
   },
   methods: {
     changeStatus(status) {
-
+      if (status === 'open') {
+        this.$inertia.post(this.route('panel.issues.open', this.issue.id));
+      } else {
+        this.$inertia.post(this.route('panel.issues.close', this.issue.id));
+      }
     },
     openUrl(url) {
       window.open(url, '_blank');
