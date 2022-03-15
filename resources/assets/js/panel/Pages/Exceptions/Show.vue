@@ -1,58 +1,61 @@
 <template>
-    <InertiaHead>
-      <title>Exception for {{ project.title }} Project</title>
-    </InertiaHead>
+  <InertiaHead>
+    <title>Exception for {{ project.title }} Project</title>
+  </InertiaHead>
 
-    <header class="flex items-center w-full h-16 px-6 bg-white border-b border-gray-200">
-        <Breadcrumbs>
-            <BreadcrumbsItem :href="route('panel.projects.index')">Projects</BreadcrumbsItem>
-            <BreadcrumbsDivider/>
-            <BreadcrumbsItem :href="route('panel.projects.show', project.id)">{{ project.title }}</BreadcrumbsItem>
-            <BreadcrumbsDivider/>
-            <BreadcrumbsItem :href="exception.route_url" class="whitespace-nowrap sm:whitespace-normal">
-                {{ exception.short_exception_text }}
-            </BreadcrumbsItem>
-        </Breadcrumbs>
-    </header>
+  <header class="flex items-center w-full h-16 px-6 bg-white border-b border-gray-200">
+    <Breadcrumbs>
+      <BreadcrumbsItem :href="route('panel.projects.index')">Projects</BreadcrumbsItem>
+      <BreadcrumbsDivider/>
+      <BreadcrumbsItem :href="route('panel.projects.show', project.id)">{{ project.title }}</BreadcrumbsItem>
+      <BreadcrumbsDivider/>
+      <BreadcrumbsItem :href="exception.route_url" class="whitespace-nowrap sm:whitespace-normal">
+        {{ exception.short_exception_text }}
+      </BreadcrumbsItem>
+    </Breadcrumbs>
+  </header>
 
-    <div class="flex w-full bg-white px-6 py-3 border-b border-gray-200 space-x-3">
-        <Button v-if="exception.status !== 'FIXED'" success @click="fixed">Mark as fixed</Button>
+  <div class="flex w-full bg-white px-6 py-3 border-b border-gray-200 space-x-3">
+    <Button v-if="exception.status !== 'FIXED'" success @click="fixed">Mark as fixed</Button>
 
-        <Button
-            v-if="exception.issue_id !== 'FIXED'"
-            primary
-            @click="fixed"
-            as="a"
-            :href="exception.issue_route_url"
-        >View issue</Button>
+    <Button
+        v-if="exception.issue_id !== 'FIXED'"
+        primary
+        @click="fixed"
+        as="a"
+        :href="exception.issue_route_url"
+    >View issue
+    </Button>
 
-        <Button v-if="!exception.publish_hash" @click="togglePublic" secondary>Share public</Button>
+    <Button v-if="!exception.publish_hash" @click="togglePublic" secondary>Share public</Button>
 
-        <Button v-if="exception.publish_hash" @click="togglePublic" danger>Remove from public</Button>
+    <Button v-if="exception.publish_hash" @click="togglePublic" danger>Remove from public</Button>
 
-        <Button v-if="exception.publish_hash" as="a" :href="exception.public_route_url" :target="`exception-${exception.id}`" secondary>View public</Button>
+    <Button v-if="exception.publish_hash" as="a" :href="exception.public_route_url"
+            :target="`exception-${exception.id}`" secondary>View public
+    </Button>
 
-        <Dropdown v-if="!exception.snooze_until">
-            <template v-slot:button>
-                <Button primary>
-                    Snooze
-                </Button>
-            </template>
+    <Dropdown v-if="!exception.snooze_until">
+      <template v-slot:button>
+        <Button primary>
+          Snooze
+        </Button>
+      </template>
 
-            <template v-slot:options>
-                <DropdownOption @click="snooze(minutes)" v-for="(option, minutes) in snoozeOptions" :key="minutes">
-                    {{ option }}
-                </DropdownOption>
-            </template>
-        </Dropdown>
+      <template v-slot:options>
+        <DropdownOption @click="snooze(minutes)" v-for="(option, minutes) in snoozeOptions" :key="minutes">
+          {{ option }}
+        </DropdownOption>
+      </template>
+    </Dropdown>
 
-        <div v-if="exception.snooze_until" class="space-x-3">
-            <Button secondary @click="unSnooze">Unsnooze</Button>
-            <span>Snoozed until {{ exception.snooze_until }}</span>
-        </div>
-		
-        <Button @click="throwInTrash" danger>Delete</Button>
+    <div v-if="exception.snooze_until" class="space-x-3">
+      <Button secondary @click="unSnooze">Unsnooze</Button>
+      <span>Snoozed until {{ exception.snooze_until }}</span>
     </div>
+
+    <Button @click="throwInTrash" danger>Delete</Button>
+  </div>
 
   <SplitContainer>
     <template v-slot:sidebar>
@@ -177,11 +180,11 @@
 
       <div class="p-6">
         <div v-show="tab === 'exception'">
-                        <pre class="line-numbers"
-                             v-if="exception.executor && exception.executor[0] && exception.executor[0].line_number"
-                             v-bind:class="[exception.markup_language]"
-                             :data-start="exception.executor[0].line_number"
-                             :data-line="exception.line"><code v-text="exception.executor_output"></code></pre>
+          <pre class="line-numbers"
+           v-if="exception.executor && exception.executor[0] && exception.executor[0].line_number"
+           v-bind:class="[exception.markup_language]"
+           :data-start="exception.executor[0].line_number"
+           :data-line="exception.line"><code v-text="exception.executor_output"></code></pre>
         </div>
 
         <div class="flex flex-col"
@@ -329,13 +332,14 @@ export default {
   mounted() {
     Prism.highlightAll();
   },
+
   methods: {
     fixed() {
       this.$inertia.post(this.route('panel.exceptions.fixed', [this.project.id, this.exception.id]));
     },
     snooze(minutes) {
       this.$inertia.post(this.route('panel.exceptions.snooze', [this.project.id, this.exception.id]), {
-          snooze: minutes
+        snooze: minutes
       });
     },
     throwInTrash() {
