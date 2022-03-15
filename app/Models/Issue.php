@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Collection;
 use Kblais\Uuid\Uuid;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -64,6 +65,22 @@ class Issue extends Model
             ->toArray();
 
         return implode(', ', $versions);
+    }
+
+    public function getLabelsAttribute(): Collection
+    {
+        if (!$this->attributes['labels']) {
+            return collect();
+        }
+
+        return collect(json_decode($this->attributes['labels'], true))
+            ->map(function ($label) {
+                return [
+                    'bgColor' => $label['color'],
+                    'textColor' => text_color_for_hex($label['color']),
+                    'text' => $label['name'],
+                ];
+            });
     }
 
     public function getExceptionsCountAttribute(): int

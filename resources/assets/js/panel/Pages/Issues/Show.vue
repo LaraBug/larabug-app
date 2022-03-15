@@ -81,7 +81,7 @@
         </p>
         <p class="text-xl">{{ exception.exception }}</p>
         <div class="flex space-x-2 mt-3">
-          <Badge v-for="label in issue.labels" :color="label.color">{{ label.name }}</Badge>
+          <Badge v-for="label in issue.labels" :color="label.bgColor" :text-color="label.textColor" class="">{{ label.text }}</Badge>
         </div>
       </div>
 

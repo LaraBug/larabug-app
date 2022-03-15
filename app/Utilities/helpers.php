@@ -9,17 +9,17 @@
  * @return Carbon\Carbon
  * @version 2.1
  */
-function carbon($time = null, $tz = null)
+function carbon($time = null, $tz = null): \Carbon\Carbon
 {
     return app(\Carbon\Carbon::class, [$time, $tz]);
 }
 
-function format_euros($value, $prefix = true)
+function format_euros($value, $prefix = true): string
 {
     return ($prefix ? '€' : '') . number_format($value, 2, ',', '');
 }
 
-function months()
+function months(): array
 {
     return [
         '1' => '1 Month',
@@ -38,7 +38,7 @@ function months()
     ];
 }
 
-function canonical_url()
+function canonical_url(): bool|string
 {
     if (!$route = Route::current()) {
         return false;
@@ -59,7 +59,7 @@ function canonical_url()
     return action($uses, $route->parameters() ?? []);
 }
 
-function countries($key = null)
+function countries($key = null): array|string
 {
     $arr = [
         "af" => "Afghanistan",
@@ -333,4 +333,79 @@ function countries($key = null)
     }
 
     return $arr;
+}
+
+function text_color_for_hex($hexColor): string
+{
+    // hexColor RGB
+    $R1 = hexdec(substr($hexColor, 1, 2));
+    $G1 = hexdec(substr($hexColor, 3, 2));
+    $B1 = hexdec(substr($hexColor, 5, 2));
+
+    // Black RGB
+    $blackColor = "#000000";
+    $R2BlackColor = hexdec(substr($blackColor, 1, 2));
+    $G2BlackColor = hexdec(substr($blackColor, 3, 2));
+    $B2BlackColor = hexdec(substr($blackColor, 5, 2));
+
+    // Calc contrast ratio
+    $L1 = 0.2126 * pow($R1 / 255, 2.2) +
+        0.7152 * pow($G1 / 255, 2.2) +
+        0.0722 * pow($B1 / 255, 2.2);
+
+    $L2 = 0.2126 * pow($R2BlackColor / 255, 2.2) +
+        0.7152 * pow($G2BlackColor / 255, 2.2) +
+        0.0722 * pow($B2BlackColor / 255, 2.2);
+
+    if ($L1 > $L2) {
+        $contrastRatio = (int)(($L1 + 0.05) / ($L2 + 0.05));
+    } else {
+        $contrastRatio = (int)(($L2 + 0.05) / ($L1 + 0.05));
+    }
+
+    // If contrast is more than 5, return black color
+    if ($contrastRatio > 5) {
+        return 'black';
+    } else {
+        // if not, return white color.
+        return 'white';
+    }
+}
+
+function hex_to_rgba($color, $opacity = false)
+{
+    $default = 'rgb(0,0,0)';
+
+    //Return default if no color provided
+    if(empty($color))
+        return $default;
+
+    //Sanitize $color if "#" is provided
+    if ($color[0] == '#' ) {
+        $color = substr( $color, 1 );
+    }
+
+    //Check if color has 6 or 3 characters and get values
+    if (strlen($color) == 6) {
+        $hex = array( $color[0] . $color[1], $color[2] . $color[3], $color[4] . $color[5] );
+    } elseif ( strlen( $color ) == 3 ) {
+        $hex = array( $color[0] . $color[0], $color[1] . $color[1], $color[2] . $color[2] );
+    } else {
+        return $default;
+    }
+
+    //Convert hexadec to rgb
+    $rgb =  array_map('hexdec', $hex);
+
+    //Check if opacity is set(rgba or rgb)
+    if($opacity){
+        if(abs($opacity) > 1)
+            $opacity = 1.0;
+        $output = 'rgba('.implode(",",$rgb).','.$opacity.')';
+    } else {
+        $output = 'rgb('.implode(",",$rgb).')';
+    }
+
+    //Return rgb(a) color string
+    return $output;
 }

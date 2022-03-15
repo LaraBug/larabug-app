@@ -1,19 +1,19 @@
 <template>
   <span
-          :class="[
-      'inline-flex items-center h-5 px-2 text-xs font-bold rounded-full mr-1',
-      { 'text-red-700 border border-red-200 bg-red-50': danger },
-      { 'text-orange-700 border border-orange-200 bg-orange-50': warning },
-      { 'text-green-700 border border-green-200 bg-green-50': success },
-      { 'text-blue-700 border border-blue-200 bg-blue-50': info },
-      { 'text-gray-700 border border-gray-200 bg-gray-50': gray },
-      { 'text-md h-7 px-2': big },
-    ]"
-          :style="[{
-            'backgroundColor': color,
-          }, {
-            'color': 'white',
-          }]"
+      :class="[
+        'inline-flex items-center h-5 px-2 text-xs font-bold rounded-full mr-1',
+        { 'text-red-700 border border-red-200 bg-red-50': danger },
+        { 'text-orange-700 border border-orange-200 bg-orange-50': warning },
+        { 'text-green-700 border border-green-200 bg-green-50': success },
+        { 'text-blue-700 border border-blue-200 bg-blue-50': info },
+        { 'text-gray-700 border border-gray-200 bg-gray-50': gray },
+        { 'text-md h-7 px-2': big },
+      ]"
+      :style="[{
+        'backgroundColor': color,
+      }, {
+        'color': textColor,
+      }]"
   >
     <slot></slot>
   </span>
@@ -47,6 +47,10 @@ export default {
             default: () => false,
         },
         color: {
+            type: String,
+            required: false,
+        },
+        textColor: {
             type: String,
             required: false,
         },
