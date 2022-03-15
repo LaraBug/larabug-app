@@ -94,8 +94,8 @@
           <span class="text-sm font-medium">Exception</span>
         </p>
         <p class="text-xl">{{ exception.exception }}</p>
-        <div class="flex space-x-2 mt-3">
-          <Badge v-for="label in issue.labels" :color="label.bgColor" :text-color="label.textColor" class="">{{ label.text }}</Badge>
+        <div class="flex mt-3 flex-wrap">
+          <Badge v-for="label in issue.formatted_labels" :color="label.bgColor" :text-color="label.textColor" class="mb-1">{{ label.text }}</Badge>
         </div>
       </div>
 

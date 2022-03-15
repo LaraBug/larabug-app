@@ -28,8 +28,8 @@
             <div class="flex-1">
               <p class="font-medium text-bold">{{ issue.exception }}</p>
               <p class="text-sm text-gray-600">{{ issue.exceptions_count }} total exceptions &centerdot; {{  issue.last_exception_at }} last occurrence</p>
-              <div class="flex space-x-2 mt-1" v-if="issue.labels.length > 0">
-                <Badge v-for="label in issue.labels" :color="label.bgColor" :text-color="label.textColor" class="">{{ label.text }}</Badge>
+              <div class="flex mt-1 flex-wrap" v-if="issue.formatted_labels.length > 0">
+                <Badge v-for="label in issue.formatted_labels" :color="label.bgColor" :text-color="label.textColor" class="mb-1">{{ label.text }}</Badge>
               </div>
             </div>
 
