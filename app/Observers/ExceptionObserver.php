@@ -20,6 +20,7 @@ class ExceptionObserver
 
         $issue->update([
             'last_exception_at' => $exception->created_at,
+            'status' => 'open',
         ]);
 
         //
