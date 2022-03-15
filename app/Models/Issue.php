@@ -16,6 +16,7 @@ class Issue extends Model
     protected $appends = [
         'exceptions_count',
         'affected_versions',
+        'formatted_labels',
     ];
 
     protected $guarded = [
@@ -68,7 +69,7 @@ class Issue extends Model
         return implode(', ', $versions);
     }
 
-    public function getLabelsAttribute(): Collection
+    public function getFormattedLabelsAttribute(): Collection
     {
         if (!$this->attributes['labels']) {
             return collect();
