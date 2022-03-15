@@ -2,7 +2,7 @@
 
 namespace App\Observers;
 
-use App\Jobs\Projects\CheckGithubWebhookJob;
+use App\Jobs\GitHub\Webhook\CheckJob;
 use App\Models\Project;
 use Illuminate\Support\Facades\Http;
 
@@ -21,7 +21,7 @@ class ProjectObserver
                     'github_repo_id' => $data['id'],
                 ]);
 
-                CheckGithubWebhookJob::dispatchIf($project->github_issues_enabled && $project->github_repo_id, $project);
+                CheckJob::dispatchIf($project->github_issues_enabled && $project->github_repo_id, $project);
             }
         }
     }

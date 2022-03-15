@@ -54,7 +54,9 @@ class Issue extends Model
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
             $query->where(function ($query) use ($search) {
-                $query->where('exception', 'like', '%' . $search . '%');
+                $query
+                    ->whereJsonContains('labels', ['name' => $search])
+                    ->orWhere('exception', 'like', '%' . $search . '%');
             });
         });
     }

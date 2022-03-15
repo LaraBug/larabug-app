@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Jobs\Projects;
+namespace App\Jobs\GitHub\Webhook;
 
 use App\Models\Issue;
 use Illuminate\Bus\Queueable;
@@ -8,8 +8,10 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use function collect;
+use function ray;
 
-class ProcessGithubWebhookJob implements ShouldQueue
+class ProcessJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 

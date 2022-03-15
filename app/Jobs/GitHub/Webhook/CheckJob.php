@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Jobs\Projects;
+namespace App\Jobs\GitHub\Webhook;
 
 use App\Models\Project;
 use Illuminate\Bus\Queueable;
@@ -9,8 +9,9 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Http;
+use function collect;
 
-class CheckGithubWebhookJob implements ShouldQueue
+class CheckJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 

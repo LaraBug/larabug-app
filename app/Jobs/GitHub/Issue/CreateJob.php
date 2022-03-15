@@ -1,24 +1,22 @@
 <?php
 
-namespace App\Jobs\Projects;
+namespace App\Jobs\GitHub\Issue;
 
 use App\Models\Issue;
 use Illuminate\Bus\Queueable;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Http;
+use function url;
 
-class CreateGithubIssueJob implements ShouldQueue
+class CreateJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    public Issue $issue;
-
-    public function __construct(Issue $issue)
+    public function __construct(public Issue $issue)
     {
-        $this->issue = $issue;
     }
 
     public function handle()
@@ -37,6 +35,7 @@ class CreateGithubIssueJob implements ShouldQueue
 
         $this->issue->github_issue_id = $data['id'];
         $this->issue->github_issue_url = $data['html_url'];
+        $this->issue->github_issue_number = $data['number'];
 
         $this->issue->saveQuietly();
     }
