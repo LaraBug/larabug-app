@@ -53,7 +53,6 @@
 		
         <Button @click="throwInTrash" danger>Delete</Button>
     </div>
-  </Toolbar>
 
   <SplitContainer>
     <template v-slot:sidebar>
