@@ -18,6 +18,14 @@
   <Toolbar>
     <Button v-if="exception.status !== 'FIXED'" success @click="fixed">Mark as fixed</Button>
 
+    <Button
+        v-if="exception.issue_id !== 'FIXED'"
+        primary
+        @click="fixed"
+        as="a"
+        :href="exception.issue_route_url"
+    >View issue</Button>
+
     <Button v-if="!exception.publish_hash" @click="togglePublic" secondary>Share public</Button>
 
     <Button v-if="exception.publish_hash" @click="togglePublic" danger>Remove from public</Button>

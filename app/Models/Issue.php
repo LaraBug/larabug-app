@@ -2,15 +2,16 @@
 
 namespace App\Models;
 
-use Illuminate\Support\Collection;
 use Kblais\Uuid\Uuid;
+use Illuminate\Support\Collection;
+use App\Models\Concerns\HasSparklines;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Issue extends Model
 {
-    use Uuid;
+    use Uuid, HasSparklines;
 
     protected $appends = [
         'exceptions_count',

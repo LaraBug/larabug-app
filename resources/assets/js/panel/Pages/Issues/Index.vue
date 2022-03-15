@@ -30,6 +30,17 @@
               <p class="text-sm text-gray-600">{{ issue.exceptions_count }} total exceptions &centerdot; {{  issue.last_exception_at }} last occurrence</p>
             </div>
 
+            <div class="text-green-400" style="width: 150px;">
+              <svg xmlns="http://www.w3.org/2000/svg"
+                   style="fill: transparent;"
+                   class="w-full h-full text-brand bg-transparent"
+                   viewBox="0 -4 128 16"
+                   preserveAspectRatio="none"
+                   v-html="issue.sparkline"
+              >
+              </svg>
+            </div>
+
             <svg
                 class="w-6 h-6 text-gray-500"
                 fill="currentColor"

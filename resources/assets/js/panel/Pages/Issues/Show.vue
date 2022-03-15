@@ -17,13 +17,27 @@
     </Breadcrumbs>
   </Header>
 
-  <Toolbar>
-    <Button v-if="issue.status !== 'closed'" success @click="changeStatus('close')">Close issue</Button>
-    <Button v-if="issue.status === 'closed'" success @click="changeStatus('open')">Reopen issue</Button>
+  <Toolbar class="">
+    <div class="space-x-3 flex-1">
+      <Button v-if="issue.status !== 'closed'" success @click="changeStatus('close')">Close issue</Button>
+      <Button v-if="issue.status === 'closed'" success @click="changeStatus('open')">Reopen issue</Button>
 
-    <Button v-if="issue.github_issue_url" primary @click="openUrl(issue.github_issue_url)">
-      View on GitHub
-    </Button>
+      <Button v-if="issue.github_issue_url" primary @click="openUrl(issue.github_issue_url)">
+        View on GitHub
+      </Button>
+    </div>
+
+    <div class="flex items-center">
+      <div class="text-green-500" style="width: 150px;">
+        <svg xmlns="http://www.w3.org/2000/svg"
+             style="fill: transparent;"
+             class="w-full h-full text-brand bg-transparent"
+             viewBox="0 -4 128 16"
+             preserveAspectRatio="none"
+             v-html="issue.sparkline"
+        ></svg>
+      </div>
+    </div>
   </Toolbar>
 
   <SplitContainer>
@@ -92,10 +106,17 @@
               :class="[ tab === 'exception' ? 'border-primary-500 text-primary-600' : 'border-transparent text-gray-500']"
               @click="tab = 'exception'"
           >
-            Exception
+            First exception
           </button>
           <button
-              class="h-12 px-3 text-xs font-medium text-gray-500 uppercase border-b-2 border-transparent rounded-none"
+              class="h-12 px-3 text-xs font-medium text-gray-500 uppercase border-b-2 rounded-none"
+              :class="[ tab === 'all-exceptions' ? 'border-primary-500 text-primary-600' : 'border-transparent text-gray-500']"
+              @click="tab = 'all-exceptions'"
+          >
+            All exceptions
+          </button>
+          <button
+              class="h-12 px-3 text-xs font-medium text-gray-500 uppercase border-b-2 rounded-none"
               :class="[ tab === 'request' ? 'border-primary-500 text-primary-600' : 'border-transparent text-gray-500']"
               @click="tab = 'request'"
           >
@@ -135,11 +156,63 @@
 
       <div class="p-6">
         <div v-show="tab === 'exception'">
-                        <pre class="line-numbers"
-                             v-if="exception.executor && exception.executor[0] && exception.executor[0].line_number"
-                             v-bind:class="[exception.markup_language]"
-                             :data-start="exception.executor[0].line_number"
-                             :data-line="exception.line"><code v-text="exception.executor_output"></code></pre>
+            <pre class="line-numbers"
+                 v-if="exception.executor && exception.executor[0] && exception.executor[0].line_number"
+                 v-bind:class="[exception.markup_language]"
+                 :data-start="exception.executor[0].line_number"
+                 :data-line="exception.line"><code v-text="exception.executor_output"></code></pre>
+        </div>
+
+        <div v-show="tab === 'all-exceptions'">
+          <Card>
+            <ul class="divide-y divide-gray-200">
+              <li v-for="exception in exceptions.data" :key="exception.id">
+                <div :href="route('panel.exceptions.show', {id: project.id, exception: exception })"
+                     class="flex items-center px-6 py-4 space-x-6 hover:bg-gray-100">
+                  <inertia-link class="flex flex-1 items-center" :href="route('panel.exceptions.show', {id: project.id, exception: exception })">
+                    <div class="flex-1">
+                      <p class="font-medium text-bold"
+                         v-bind:class="{'text-gray-500': exception.status === 'FIXED'}">
+                      </p>
+
+                      <p class="text-sm text-gray-600">
+                        <Badge success v-if="exception.status === 'FIXED'">{{ exception.status_text }}</Badge>
+                        <Badge info v-if="exception.status === 'READ'">{{ exception.status_text }}</Badge>
+                        <Badge danger v-if="exception.status === 'OPEN'">{{ exception.status_text }}</Badge>
+                        <span v-if="exception.snooze_until">&centerdot; </span>
+                        <Badge info v-if="exception.snooze_until">Snoozed until {{ exception.snooze_until }}</Badge>
+                        &centerdot; {{ exception.human_date }} &centerdot;
+                        {{ exception.created_at }}
+                        <Badge info v-if="exception.file_type === 'javascript'">&centerdot; Javascript</Badge>
+                      </p>
+                    </div>
+                    <div class="flex-1"></div>
+
+                    <span v-if="exception.project_version"><Badge gray big>{{ exception.project_version }}</Badge></span>
+
+                    <span v-if="exception.environment"><Badge gray big>{{ exception.environment }}</Badge></span>
+
+                    <svg
+                        class="w-6 h-6 text-gray-500"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                          fill-rule="evenodd"
+                          d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                          clip-rule="evenodd"
+                      ></path>
+                    </svg>
+                  </inertia-link>
+                </div>
+              </li>
+            </ul>
+
+            <template #footer>
+              <Paginator :paginated="exceptions"/>
+            </template>
+          </Card>
         </div>
 
         <div class="flex flex-col"
@@ -230,10 +303,14 @@ import SplitContainer from "../../Components/SplitContainer";
 import SidebarItem from "../../Components/SidebarItem";
 import Prism from "../../../plugins/prism";
 import Badge from "../../Components/Badge";
+import Card from "../../Components/Card";
+import Paginator from "../../Components/Paginator";
 
 export default {
   name: "Show",
   components: {
+    Paginator,
+    Card,
     Badge,
     SidebarItem, SplitContainer, Button, Toolbar, BreadcrumbsDivider, BreadcrumbsItem, Breadcrumbs, Header,},
   layout: MinimalLayout,
@@ -246,6 +323,10 @@ export default {
   data() {
     return {
       tab: 'exception',
+      form: {
+        search: null,
+      },
+      selected: [],
     }
   },
   mounted() {
