@@ -159,6 +159,33 @@
                         id="custom_webhook_url"
                         required
                     />
+                     <div class="relative flex items-start">
+                        <div class="flex items-center h-5">
+                            <input
+                                :class="[
+        'text-primary-600 rounded border-gray-300 transition',
+        'focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-offset-0',
+      ]"
+                                id="telegram_notifications_enabled"
+                                type="checkbox"
+                                v-model="form.telegram_notifications_enabled" />
+                        </div>
+                        <div class="ml-3 text-sm">
+                            <label for="telegram_notifications_enabled" class="font-medium text-gray-700">Receive Telegram notification</label>
+                        </div>
+                    </div>
+                    <div v-if="form.telegram_notifications_enabled">
+                        <TelegramConnectingModal v-if="!form.telegram_chat_id" @chatIdUpdated="updateTelegramChatId" />
+
+                        <template v-if="form.telegram_chat_id">
+                            <div>
+                              <Badge success class="w-auto">Telegram account associated</Badge>
+                            </div>
+                            <div class="mt-2">
+                              <Button @click="telegramDissociate" type="button" primary>Dissociate telegram</Button>
+                            </div>
+                        </template>
+                    </div>
                 </div>
             </form>
 
@@ -181,8 +208,10 @@ import BreadcrumbsItem from '@/Components/BreadcrumbsItem'
 import BreadcrumbsDivider from '@/Components/BreadcrumbsDivider'
 import Card from '@/Components/Card'
 import Button from '@/Components/Button'
+import Badge from '@/Components/Badge'
 import FormInputGroup from '@/Components/FormInputGroup'
 import FormTextareaGroup from '@/Components/FormTextareaGroup'
+import TelegramConnectingModal from '@/Components/Notifications/TelegramConnectingModal'
 import { useForm } from '@inertiajs/inertia-vue3'
 
 export default {
@@ -193,8 +222,10 @@ export default {
         BreadcrumbsDivider,
         Card,
         Button,
+        Badge,
         FormInputGroup,
         FormTextareaGroup,
+        TelegramConnectingModal,
     },
 
     props: {
@@ -217,6 +248,8 @@ export default {
                 custom_webhook_enabled: this.project.custom_webhook_enabled,
                 notifications_enabled: this.project.notifications_enabled,
                 mobile_notifications_enabled: this.project.mobile_notifications_enabled,
+                telegram_notifications_enabled: this.project.telegram_notifications_enabled,
+                telegram_chat_id: this.project.telegram_chat_id,
             }),
         }
     },
@@ -232,6 +265,17 @@ export default {
             this.form.delete(this.route('panel.projects.destroy', this.project.id),{
               onBefore: () => confirm('Are you sure you want to delete this project?'),
             })
+        },
+        updateTelegramChatId(response) {
+            if (! response.isSuccesseded) {
+                this.telegramDissociate()
+            }
+
+            this.form.telegram_chat_id = response.id
+        },
+        telegramDissociate() {
+            this.form.telegram_notifications_enabled = false
+            this.form.telegram_chat_id = ''
         },
     },
 }

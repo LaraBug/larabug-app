@@ -9,6 +9,7 @@ use App\Http\Controllers\ExceptionController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DocumentationController;
 use App\Http\Controllers\Profile\ProfileController;
+use App\Http\Controllers\TelegramController;
 
 Route::permanentRedirect('terms', 'terms-of-service');
 Route::permanentRedirect('privacy', 'privacy-policy');
@@ -48,6 +49,8 @@ Route::get('login/{provider}/callback', [LoginController::class, 'handleProvider
 
 Route::get('scripts/feedback', [FeedbackController::class, 'script'])->name('feedback.script');
 
+Route::post('projects/channels/telegram/'.config('services.telegram-bot-api.token').'/webhook', [TelegramController::class, 'receiveFromWebhook']);
+
 Route::middleware('auth')->prefix('panel')->name('panel.')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('dashboard');
     Route::get('introduction', [HomeController::class, 'introduction'])->name('introduction');
@@ -73,6 +76,8 @@ Route::middleware('auth')->prefix('panel')->name('panel.')->group(function () {
         Route::post('projects/{id}/exceptions/mark-as', [ExceptionController::class, 'markAs'])->name('exceptions.mark-as');
         Route::post('projects/{id}/exceptions/mark-all-fixed', [ExceptionController::class, 'markAllAsFixed'])->name('exceptions.mark-all-fixed');
         Route::post('projects/{id}/exceptions/mark-all-read', [ExceptionController::class, 'markAllAsRead'])->name('exceptions.mark-all-read');
+
+        Route::get('projects/channels/telegram/generate-token', [TelegramController::class, 'generateToken'])->name('projects.channels.telegram.generate-token');
 
         Route::get('feedback', [FeedbackController::class, 'index'])
             ->middleware('has.feature:feedback')

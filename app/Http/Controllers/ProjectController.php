@@ -47,6 +47,8 @@ class ProjectController extends Controller
             'slack_webhook_enabled',
             'discord_webhook_enabled',
             'custom_webhook_enabled',
+            'telegram_notifications_enabled',
+            'telegram_chat_id',
         ]));
 
         $request->user()->projects()->save($project, ['owner' => true]);

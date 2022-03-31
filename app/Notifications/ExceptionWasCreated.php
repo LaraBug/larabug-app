@@ -19,6 +19,8 @@ use NotificationChannels\Fcm\Resources\AndroidConfig;
 use NotificationChannels\Fcm\Resources\ApnsFcmOptions;
 use NotificationChannels\Fcm\Resources\AndroidFcmOptions;
 use NotificationChannels\Fcm\Resources\AndroidNotification;
+use NotificationChannels\Telegram\TelegramChannel;
+use NotificationChannels\Telegram\TelegramMessage;
 
 class ExceptionWasCreated extends Notification implements ShouldQueue
 {
@@ -63,6 +65,10 @@ class ExceptionWasCreated extends Notification implements ShouldQueue
 
         if ($notifiable->mobile_notifications_enabled && $notifiable->users()->wherePivot('owner', true)->first()?->fcmTokens()->exists()) {
             $array[] = FcmChannel::class;
+        }
+
+        if ($this->project->telegram_notifications_enabled && $this->project->telegram_chat_id) {
+            $array[] = TelegramChannel::class;
         }
 
         return $array;
@@ -175,6 +181,21 @@ class ExceptionWasCreated extends Notification implements ShouldQueue
                     ->setFcmOptions(ApnsFcmOptions::create()->setAnalyticsLabel('analytics_ios'))
                     ->setPayload(['aps' => ['sound' => 'default']])
             );
+    }
+
+    public function toTelegram($notifiable)
+    {
+        $messageContent = str("\[{$this->project->title}] *New exception thrown*\n\n")
+            ->append("*Exception:* ```{$this->exception->exception}```\n\n")
+            ->append("*Project:* [{$this->project->title}]({$this->exception->fullUrl})\n")
+            ->append("*File:* {$this->exception->file}:{$this->exception->line}\n")
+            ->append("*Environment:* {$this->exception->environment}\n")
+            ->append("*Date:* {$this->exception->created_at->format('Y-m-d H:i:s')} (UTC)");
+
+        return TelegramMessage::create()
+            ->to($this->project->telegram_chat_id)
+            ->content($messageContent->toString())
+            ->button('View in LaraBug', $this->exception->route_url);
     }
 
     /**
