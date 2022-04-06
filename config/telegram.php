@@ -1,7 +1,5 @@
 <?php
 
-use App\Console\Commands\TelegramStart;
-
 return [
     /*
     |--------------------------------------------------------------------------
