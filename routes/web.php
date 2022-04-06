@@ -49,8 +49,6 @@ Route::get('login/{provider}/callback', [LoginController::class, 'handleProvider
 
 Route::get('scripts/feedback', [FeedbackController::class, 'script'])->name('feedback.script');
 
-Route::post('projects/channels/telegram/'.config('services.telegram.token').'/webhook', [TelegramController::class, 'receiveFromWebhook']);
-
 Route::middleware('auth')->prefix('panel')->name('panel.')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('dashboard');
     Route::get('introduction', [HomeController::class, 'introduction'])->name('introduction');

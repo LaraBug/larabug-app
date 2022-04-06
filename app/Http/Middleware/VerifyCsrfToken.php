@@ -23,6 +23,5 @@ class VerifyCsrfToken extends Middleware
         'api/recent-exceptions',
         'webhook/check',
         'stripe/*',
-        // 'projects/channels/telegram/TOKEN/webhook'
     ];
 }

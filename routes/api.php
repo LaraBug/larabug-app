@@ -6,6 +6,7 @@ Route::post('/feedback', [ApiController::class, 'feedback'])->name('api.feedback
 
 Route::post('login', [\App\Http\Controllers\Api\Auth\LoginController::class, 'login'])->name('api.login');
 Route::post('register-fcm-token', [\App\Http\Controllers\Api\UserController::class, 'registerFcmToken'])->name('api.register-fcm-token');
+Route::post('projects/channels/telegram/'.config('services.telegram.token').'/webhook', [TelegramController::class, 'receiveFromWebhook']);
 
 Route::middleware('auth:api')->group(function () {
     Route::post('/log', [ApiController::class, 'log'])->name('exceptions.log');
