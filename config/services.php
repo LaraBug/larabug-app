@@ -52,7 +52,7 @@ return [
         'token' => env('HORIZON_TOKEN')
    ],
 
-    'telegram-bot-api' => [
+    'telegram' => [
         'token' => env('TELEGRAM_BOT_TOKEN'),
         'bot_handle' => env('TELEGRAM_BOT_HANDLE')
     ],

@@ -34,7 +34,7 @@ return [
     'bots'                         => [
         'mybot' => [
             'username'            => 'LaraBug Bot',
-            'token'               => env('TELEGRAM_BOT_TOKEN', config('services.telegram-bot-api.token')),
+            'token'               => env('TELEGRAM_BOT_TOKEN', config('services.telegram.token')),
             'certificate_path'    => env('TELEGRAM_CERTIFICATE_PATH', ''),
             'webhook_url'         => env('TELEGRAM_WEBHOOK_URL'),
             'commands'            => [

@@ -15,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->app->singleton(Api::class, function ($app) {
-            return new Api(config('services.telegram-bot-api.token'));
+            return new Api(config('services.telegram.token'));
         });
     }
 

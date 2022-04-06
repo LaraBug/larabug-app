@@ -10,7 +10,7 @@ class TelegramController extends Controller
 {
     public function generateToken(Request $request, InviteToken $inviteTokenUtility)
     {
-        $botHandle = config('services.telegram-bot-api.bot_handle');
+        $botHandle = config('services.telegram.bot_handle');
 
         $token = $inviteTokenUtility->generate($request->user());
 
@@ -34,7 +34,7 @@ class TelegramController extends Controller
         $chatId = $request['message']['chat']['id'];
         [$command, $token] = explode(' ', $request['message']['text']);
 
-        if (! in_array($command, ['/start', '/start@'.config('services.telegram-bot-api.bot_handle')])) {
+        if (! in_array($command, ['/start', '/start@'.config('services.telegram.bot_handle')])) {
             $telegram->sendMessage([
                 'chat_id' => $chatId,
                 'text' => 'Unaccepted token',
