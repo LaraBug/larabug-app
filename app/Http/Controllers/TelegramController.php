@@ -29,7 +29,7 @@ class TelegramController extends Controller
         ]);
     }
 
-    public function  receiveFromWebhook(Request $request, Api $telegram, InviteToken $inviteTokenUtility)
+    public function receiveFromWebhook(Request $request, Api $telegram, InviteToken $inviteTokenUtility)
     {
         $chatId = $request['message']['chat']['id'];
         [$command, $token] = explode(' ', $request['message']['text']);
