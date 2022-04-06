@@ -9,6 +9,10 @@ class ExceptionObserver
 {
     public function created(Exception $exception)
     {
+        if (! $exception->exception) {
+            return;
+        }
+
         // Check for issue
         $issue = Issue::firstOrCreate([
             'exception' => $exception->exception,

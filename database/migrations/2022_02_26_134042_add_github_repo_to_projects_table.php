@@ -9,7 +9,7 @@ class AddGithubRepoToProjectsTable extends Migration
     public function up()
     {
         Schema::table('projects', function (Blueprint $table) {
-            $table->string('github_repo')->after('user_id');
+            $table->string('github_repo')->nullable()->after('user_id');
         });
     }
 
