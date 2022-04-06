@@ -2,7 +2,7 @@
     <Modal :isOpen="isOpen" closeLink="#">
         <Card contained>
             <template #header>
-                <h2 class="text-xl font-bold">Telegram Notifaications</h2>
+                <h2 class="text-xl font-bold">Telegram Notifications</h2>
             </template>
 
             <div v-if="!inviteToken" class="d-flex align-items-center justify-content-center card-bg-secondary p-5 bottom-radius">
