@@ -36,11 +36,8 @@ class HomeController extends Controller
             ->oldest()
             ->select(['created_at'])
             ->get()
-            ->groupBy(function ($exception) {
-                return $exception->created_at->format('Y-m-d');
-            })->map(function ($exceptions) {
-                return $exceptions->count();
-            });
+            ->groupBy(fn ($exception) => $exception->created_at->format('Y-m-d'))
+            ->map(fn ($exceptions) => $exceptions->count());
 
 
         return inertia('Dashboard', [
