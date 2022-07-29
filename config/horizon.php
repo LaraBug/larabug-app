@@ -169,6 +169,12 @@ return [
             'connection' => 'redis',
             'queue' => ['default'],
             'balance' => 'auto',
+            'maxTime' => 0,
+            'maxJobs' => 0,
+            'memory' => 128,
+            'tries' => 1,
+            'timeout' => 60,
+            'nice' => 0,
         ]
     ],
 
@@ -176,7 +182,7 @@ return [
         'production' => [
             'supervisor-1' => [
                 'minProcesses' => 1,
-                'maxProcesses' => 5,
+                'maxProcesses' => 3,
                 'balanceMaxShift' => 1,
                 'balanceCooldown' => 3,
             ],

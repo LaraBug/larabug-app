@@ -9,6 +9,9 @@ mix
     .sass('resources/assets/sass/panel/app.scss', 'public/css/app.css', {},
         [tailwindcss('tailwind.panel.js')]
     )
+    .sass('resources/assets/sass/admin/app.scss', 'public/css/admin.css', {},
+        [tailwindcss('tailwind.admin.js')]
+    )
 
     .options({
         processCssUrls: false,
@@ -27,7 +30,8 @@ mix
     })
     .babelConfig({
         plugins: ['@babel/plugin-syntax-dynamic-import'],
-    });
+    })
+    .disableSuccessNotifications();
 
 if (mix.inProduction()) {
     mix.version();

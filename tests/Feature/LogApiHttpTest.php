@@ -8,15 +8,14 @@ use NotificationChannels\Fcm\FcmChannel;
 use App\Notifications\ExceptionWasCreated;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\Discord\DiscordChannel;
-
-use NotificationChannels\Webhook\WebhookChannel;
+use App\Notifications\CustomWebhook\WebhookChannel;
 
 beforeEach(function () {
     Notification::fake();
     Mail::fake();
 
     $this->project = Project::factory()->create();
-    $this->user = User::factory()->create();
+    $this->user = User::factory()->create(['email_verified_at' => now()]);
     $this->user->projects()->save($this->project, ['owner' => true]);
 });
 

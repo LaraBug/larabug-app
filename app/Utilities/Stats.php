@@ -16,7 +16,7 @@ class Stats
      */
     public function exceptionGrowth()
     {
-        $exceptions = Exception::where('created_at', '>=', carbon()->subDays(30))
+        $exceptions = Exception::query()->where('created_at', '>=', carbon()->subDays(30))
             ->where('created_at', '<=', carbon())
             ->oldest()
             ->get();

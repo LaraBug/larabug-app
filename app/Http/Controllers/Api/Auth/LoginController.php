@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Api\Auth;
 
-use Auth;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Api\UserResource;
 
@@ -19,7 +20,7 @@ class LoginController extends Controller
             return $this->sendLoginResponse($request, $user);
         }
 
-        return response()->json(['error' => trans('auth.failed')], 401);
+        return response()->json(['error' => trans('auth.failed')], Response::HTTP_UNAUTHORIZED);
     }
 
     public function sendLoginResponse(Request $request, User $user)
@@ -30,13 +31,13 @@ class LoginController extends Controller
         return response()->json([
             'user' => new UserResource($user),
             'token' => $user->api_token
-        ], 200);
+        ], Response::HTTP_OK);
     }
 
     public function sendFailedLoginResponse($message = 'An error occured.')
     {
         return response([
             'error' => $message,
-        ], 422);
+        ], Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 }

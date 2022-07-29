@@ -1,6 +1,6 @@
 <template>
     <div class="flex flex-col md:flex-row min-h-screen bg-primary-100">
-      <div class="flex flex-col w-full md:w-16 text-white bg-primary-900 flex-shrink-0">
+      <div class="flex flex-col w-full md:w-16 text-white bg-primary-900 flex-shrink-0 md:h-screen md:fixed">
         <div class="flex-shrink-0 p-4 flex flex-row items-center justify-between md:justify-center">
           <p class="text-xl font-bold">🐞</p>
           <button class="rounded-lg md:hidden rounded-lg focus:outline-none focus:shadow-outline" @click="open = !open">
@@ -52,6 +52,26 @@
             <span class="md:hidden">Projects</span>
           </NavListItem>
 
+          <NavListItem @click="open = false" href="/panel/issues" :is-active="route().current('panel.issues.*')" :big="false">
+            <template #icon>
+              <svg
+                  class="w-6 h-6 text-primary-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
+              </svg>
+            </template>
+
+            <span class="md:hidden">Issues</span>
+          </NavListItem>
+
           <NavListItem @click="open = false" href="/panel/profile" :is-active="route().current('panel.profile.*')" :big="false">
             <template #icon>
               <svg
@@ -99,7 +119,7 @@
           </div>
         </footer>
       </div>
-        <main class="flex flex-col flex-1 overflow-hidden">
+        <main class="flex flex-col flex-1 overflow-hidden pl-16">
             <slot></slot>
         </main>
     </div>

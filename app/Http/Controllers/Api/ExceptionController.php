@@ -12,7 +12,7 @@ class ExceptionController extends Controller
     public function index(Request $request)
     {
         return ExceptionResource::collection(
-            Exception::whereIn('project_id', $request->user()->projects()->pluck('id')->toArray())
+            Exception::query()->whereIn('project_id', $request->user()->projects()->pluck('id')->toArray())
                 ->with('project:id,title')
                 ->latest('created_at')
                 ->limit(8)
@@ -22,7 +22,7 @@ class ExceptionController extends Controller
 
     public function show(Request $request, $exceptionId)
     {
-        $exception = Exception::whereIn('project_id', $request->user()->projects()->pluck('id')->toArray())
+        $exception = Exception::query()->whereIn('project_id', $request->user()->projects()->pluck('id')->toArray())
             ->findOrFail($exceptionId);
 
         if ($exception->status == Exception::OPEN) {
@@ -37,7 +37,7 @@ class ExceptionController extends Controller
     {
         $projects = $request->user()->projects()->get(['id'])->pluck('id')->toArray();
 
-        $exception = Exception::whereIn('project_id', $projects)
+        $exception = Exception::query()->whereIn('project_id', $projects)
             ->findOrFail($exceptionId);
 
         $exception->markAsRead();
@@ -52,7 +52,7 @@ class ExceptionController extends Controller
 
     public function togglePublic(Request $request, $exceptionId)
     {
-        $exception = Exception::whereIn('project_id', $request->user()->projects()->pluck('id')->toArray())->findOrFail($exceptionId);
+        $exception = Exception::query()->whereIn('project_id', $request->user()->projects()->pluck('id')->toArray())->findOrFail($exceptionId);
 
         if ($exception->publish_hash) {
             $exception->removePublic();
@@ -65,7 +65,7 @@ class ExceptionController extends Controller
 
     public function destroy(Request $request, $exceptionId)
     {
-        $exception = Exception::whereIn('project_id', $request->user()->projects()->pluck('id')->toArray())
+        $exception = Exception::query()->whereIn('project_id', $request->user()->projects()->pluck('id')->toArray())
             ->findOrFail($exceptionId);
 
         $exception->delete();

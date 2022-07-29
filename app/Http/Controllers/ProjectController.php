@@ -34,7 +34,7 @@ class ProjectController extends Controller
 
     public function store(ProjectRequest $request)
     {
-        $project = Project::create($request->only([
+        $project = Project::query()->create($request->only([
             'title',
             'url',
             'description',
@@ -84,7 +84,7 @@ class ProjectController extends Controller
             ->findOrFail($id);
 
         if (!$project->isOwner()) {
-            return redirect()->route('projects.show', $project)->withErrors([
+            return redirect()->route('panel.projects.show', $project)->withErrors([
                 'You are not the main owner of this project, therefore you cannot edit the project.'
             ]);
         }
@@ -103,7 +103,7 @@ class ProjectController extends Controller
         $previousUrl = $project->url;
 
         if (!$project->isOwner()) {
-            return redirect()->route('projects.show', $project)->withErrors([
+            return redirect()->route('panel.projects.show', $project)->withErrors([
                 'You are not the main owner of this project, therefore you cannot edit the project.'
             ]);
         }
@@ -131,7 +131,7 @@ class ProjectController extends Controller
             ->findOrFail($id);
 
         if (!$project->isOwner()) {
-            return redirect()->route('projects.show', $project)->withErrors([
+            return redirect()->route('panel.projects.show', $project)->withErrors([
                 'You are not the main owner of this project, therefore you cannot edit the project.'
             ]);
         }
@@ -171,7 +171,7 @@ class ProjectController extends Controller
 
         $project->notify(new TestWebhook($project, $request->input('type', 'slack')));
 
-        return redirect()->route('projects.show', $project)->withSuccess('Test notification has been send!');
+        return redirect()->route('panel.projects.show', $project)->withSuccess('Test notification has been send!');
     }
 
     protected function attachGroup(Request $request, Project $project)

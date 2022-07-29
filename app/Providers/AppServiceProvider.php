@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Filament\Facades\Filament;
 use Illuminate\Support\ServiceProvider;
 use Telegram\Bot\Api;
 
@@ -33,5 +34,9 @@ class AppServiceProvider extends ServiceProvider
         if (env('IDE_HELPER')) {
             $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
         }
+
+        Filament::serving(function () {
+            Filament::registerTheme(mix('css/admin.css'));
+        });
     }
 }

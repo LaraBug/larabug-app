@@ -17,11 +17,18 @@ class ExceptionResource extends Resource
     {
         return $form
             ->schema([
-                Components\TextInput::make('exception')->autofocus()->required(),
-                Components\BelongsToSelect::make('project_id')
-                    ->relationship('project', 'title')
-                    ->searchable()
-                    ->required(),
+                Components\Card::make()
+                    ->schema([
+                        Components\TextInput::make('exception')
+                            ->required()
+                            ->inlineLabel(),
+
+                        Components\BelongsToSelect::make('project_id')
+                            ->inlineLabel()
+                            ->relationship('project', 'title')
+                            ->searchable()
+                            ->required(),
+                    ]),
             ]);
     }
 

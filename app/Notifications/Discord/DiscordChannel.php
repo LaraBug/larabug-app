@@ -24,12 +24,12 @@ class DiscordChannel
      *
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function send($notifiable, Notification $notification)
+    public function send($notifiable, Notification $notification): void
     {
-        /* @var $message \App\Utilities\Discord\DiscordMessage */
         $message = $notification->toDiscord($notifiable);
+        $route = $notifiable->routeNotificationForDiscord($notification);
 
-        $this->discord->send($notifiable, [
+        $this->discord->send($notifiable, $route,  [
             'content' => str_limit($message->content, 1500),
             'username' => $message->username,
             'avatar_url' => $message->image,

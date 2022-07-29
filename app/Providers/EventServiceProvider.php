@@ -5,6 +5,10 @@ namespace App\Providers;
 use App\Listeners\UpdateLoginData;
 use App\Events\ExceptionWasCreated;
 use App\Listeners\UpdateStatistics;
+use App\Models\Exception;
+use App\Models\Issue;
+use App\Observers\ExceptionObserver;
+use App\Observers\IssueObserver;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -38,7 +42,8 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Issue::observe(IssueObserver::class);
+        Exception::observe(ExceptionObserver::class);
     }
 
     /**

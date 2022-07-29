@@ -23,7 +23,7 @@ class ExceptionFactory extends Factory
     public function definition()
     {
         return [
-            'project_id' => Project::factory()
+            'exception' => $this->faker->text(100),
         ];
     }
 }

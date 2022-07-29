@@ -6,7 +6,7 @@ This repository contains the actual code on https://www.larabug.com
 
 ## Requirements
 
-* PHP 8.0 or higher
+* PHP 8.1 or higher
 * Git
 * Composer
 * MySQL (>=5.7) or PostgreSQL (>=9.4)

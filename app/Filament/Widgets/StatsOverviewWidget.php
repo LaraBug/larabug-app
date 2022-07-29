@@ -27,7 +27,7 @@ class StatsOverviewWidget extends BaseWidget
     {
         $lastMonth = Carbon::now()->subMonth();
 
-        return Project::where('last_error_at', '>=', $lastMonth)->count();
+        return Project::query()->where('last_error_at', '>=', $lastMonth)->count();
     }
 
     protected function getExceptionGrowth(): int
@@ -55,16 +55,16 @@ class StatsOverviewWidget extends BaseWidget
 
     protected function getTotalExceptions(): int
     {
-        return Exception::count();
+        return Exception::query()->count();
     }
 
     protected function getTotalProjects(): int
     {
-        return Project::count();
+        return Project::query()->count();
     }
 
     protected function getTotalUsers(): int
     {
-        return User::count();
+        return User::query()->count();
     }
 }

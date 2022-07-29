@@ -7,6 +7,8 @@ use DateTimeInterface;
 use EloquentFilter\Filterable;
 use Illuminate\Database\Eloquent\Model;
 use App\Notifications\ExceptionWasCreated;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
@@ -58,6 +60,7 @@ class Exception extends Model
     protected $appends = [
         'human_date',
         'public_route_url',
+        'issue_route_url',
         'route_url',
         'status_text',
         'short_exception_text',
@@ -65,12 +68,12 @@ class Exception extends Model
         'markup_language'
     ];
 
-    public function getHumanDateAttribute()
+    public function getHumanDateAttribute(): string
     {
         return $this->created_at->diffForHumans();
     }
 
-    public function getRouteUrlAttribute()
+    public function getRouteUrlAttribute(): string
     {
         return route('panel.exceptions.show', [$this->project_id, $this]);
     }
@@ -84,12 +87,21 @@ class Exception extends Model
         return route('public.exception', $this);
     }
 
+    public function getIssueRouteUrlAttribute(): ?string
+    {
+        if (! $this->issue_id) {
+            return null;
+        }
+
+        return route('panel.issues.show', $this->issue_id);
+    }
+
     public function getStatusTextAttribute()
     {
         return trans('status.' . strtoupper($this->status));
     }
 
-    public function getMarkupLanguageAttribute()
+    public function getMarkupLanguageAttribute(): string
     {
         $pathinfo = pathinfo($this->file);
 
@@ -125,7 +137,7 @@ class Exception extends Model
         })->toArray());
     }
 
-    public function getShortExceptionTextAttribute()
+    public function getShortExceptionTextAttribute(): string
     {
         if (!$this->exception) {
             return '-No exception text-';
@@ -154,20 +166,19 @@ class Exception extends Model
         return $query->whereStatus(self::OPEN);
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function project()
+    public function project(): BelongsTo
     {
         return $this->belongsTo(Project::class);
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function feedback()
+    public function feedback(): HasMany
     {
         return $this->hasMany(Feedback::class);
+    }
+
+    public function issue(): BelongsTo
+    {
+        return $this->belongsTo(Issue::class);
     }
 
     public function occurences()
@@ -271,7 +282,7 @@ class Exception extends Model
         });
 
         static::created(function ($exception) {
-            if ($exception->project->notifications_enabled) {
+            if ($exception->project && $exception->project->notifications_enabled) {
                 $exception->project->notify(new ExceptionWasCreated($exception));
             }
         });

@@ -6,6 +6,7 @@ use Ramsey\Uuid\Uuid;
 use App\Models\Exception;
 use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
 use App\Jobs\Projects\ProcessException;
 use App\Http\Requests\Api\FeedbackRequest;
@@ -14,7 +15,16 @@ class ApiController extends Controller
 {
     public function log(Request $request)
     {
-        $project = $request->user()->projects()->where('key', $request->input('project'))->firstOrFail();
+        /* @var $user \App\Models\User */
+        $user = $request->user();
+
+        if (!$user->hasVerifiedEmail()) {
+            return response()->json([
+                'error' => 'This is not an verified account.'
+            ])->setStatusCode(Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
+
+        $project = $user->projects()->where('key', $request->input('project'))->firstOrFail();
 
         // Legacy support for LaraBug packages lower than version 2
         if ($legacyExecutor = $request->input('exegutor')) {
@@ -26,7 +36,7 @@ class ApiController extends Controller
         ) {
             return response()->json([
                 'error' => 'Did not receive the correct parameters to process this exception'
-            ])->setStatusCode(422);
+            ])->setStatusCode(Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
         dispatch_sync(new ProcessException([

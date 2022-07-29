@@ -24,7 +24,7 @@ class FeedbackController extends Controller
 
     public function script(Request $request)
     {
-        $project = Project::whereHas('users', function ($query) {
+        $project = Project::query()->whereHas('users', function ($query) {
             return $query
                 ->where('project_user.owner', true);
         })

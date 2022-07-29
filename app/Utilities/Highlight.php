@@ -1,4 +1,6 @@
-<?php namespace App\Utilities;
+<?php
+
+namespace App\Utilities;
 
 class Highlight
 {
@@ -6,7 +8,7 @@ class Highlight
 
     public static function process($s)
     {
-        $class = get_called_class();
+        $class = static::class;
         $obj = new $class;
 
         return $obj->highlight($s);

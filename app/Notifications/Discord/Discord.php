@@ -30,9 +30,9 @@ class Discord
      * @return array
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function send($notifiable, array $data)
+    public function send($notifiable, string $route, array $data)
     {
-        return $this->request('POST', $notifiable->routeNotificationForDiscord(), $data);
+        return $this->request('POST', $route, $data);
     }
 
     /**

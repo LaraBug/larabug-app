@@ -4,6 +4,7 @@ module.exports = {
     content: [
         './resources/views/**/*.blade.php',
         './resources/assets/js/frontend/**/*.js',
+        './vendor/filament/**/*.blade.php',
     ],
     theme: {
         colors: {

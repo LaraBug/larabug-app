@@ -8,9 +8,11 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $projects = auth()->user()->projects()->get(['id'])->pluck('id')->toArray();
+        $projects = auth()->user()->projects()->get(['id', 'total_exceptions']);
+        $projectIds = $projects->pluck('id')->toArray();
 
-        $exceptions = Exception::whereIn('project_id', $projects)
+        $exceptions = Exception::query()
+            ->whereIn('project_id', $projectIds)
             ->with('project:id,title')
             ->latest('created_at')
             ->limit(8)
@@ -28,10 +30,11 @@ class HomeController extends Controller
                 'created_at',
             ]);
 
-        $totalExceptions = auth()->user()->projects()->sum('total_exceptions');
-        $totalProjects = auth()->user()->projects()->count();
+        $totalExceptions = $projects->sum('total_exceptions');
+        $totalProjects = $projects->count();
 
-        $exceptionChart = Exception::whereIn('project_id', $projects)
+        $exceptionChart = Exception::query()
+            ->whereIn('project_id', $projectIds)
             ->where('created_at', '>', now()->subDays(7))
             ->oldest()
             ->select(['created_at'])

@@ -58,98 +58,211 @@
                     </div>
                 </div>
 
-                <div class="mt-4 space-y-4" :class="{'opacity-25': !form.notifications_enabled}">
-                    <label class="text-base font-medium">On new exceptions</label>
-                    <div class="relative flex items-start">
-                        <div class="flex items-center h-5">
+                <div class="mt-4 space-y-6" :class="{'opacity-25': !form.notifications_enabled}">
+                    <div class="space-y-4">
+                        <label class="text-base font-medium">On new exceptions</label>
+                        <div class="relative flex items-start">
+                          <div class="flex items-center h-5">
                             <input
                                 :class="[
-        'text-primary-600 rounded border-gray-300 transition',
-        'focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-offset-0',
-      ]"
+          'text-primary-600 rounded border-gray-300 transition',
+          'focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-offset-0',
+        ]"
                                 id="receive_email"
                                 type="checkbox"
                                 v-model="form.receive_email" />
-                        </div>
-                        <div class="ml-3 text-sm">
+                          </div>
+                          <div class="ml-3 text-sm">
                             <label for="receive_email" class="font-medium text-gray-700">Receive email notification</label>
+                          </div>
                         </div>
-                    </div>
-                    <div class="relative flex items-start">
-                        <div class="flex items-center h-5">
+                        <div class="relative flex items-start">
+                          <div class="flex items-center h-5">
                             <input
                                 :class="[
-        'text-primary-600 rounded border-gray-300 transition',
-        'focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-offset-0',
-      ]"
+          'text-primary-600 rounded border-gray-300 transition',
+          'focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-offset-0',
+        ]"
                                 id="mobile_notifications_enabled"
                                 type="checkbox"
                                 v-model="form.mobile_notifications_enabled" />
-                        </div>
-                        <div class="ml-3 text-sm">
+                          </div>
+                          <div class="ml-3 text-sm">
                             <label for="mobile_notifications_enabled" class="font-medium text-gray-700">Receive mobile notification</label>
+                          </div>
                         </div>
-                    </div>
-                    <div class="relative flex items-start">
-                        <div class="flex items-center h-5">
+                        <div class="relative flex items-start">
+                          <div class="flex items-center h-5">
                             <input
                                 :class="[
-        'text-primary-600 rounded border-gray-300 transition',
-        'focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-offset-0',
-      ]"
+          'text-primary-600 rounded border-gray-300 transition',
+          'focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-offset-0',
+        ]"
                                 id="slack_webhook_enabled"
                                 type="checkbox"
                                 v-model="form.slack_webhook_enabled" />
-                        </div>
-                        <div class="ml-3 text-sm">
+                          </div>
+                          <div class="ml-3 text-sm">
                             <label for="slack_webhook_enabled" class="font-medium text-gray-700">Call Slack Webhook</label>
+                          </div>
                         </div>
-                    </div>
-                    <FormInputGroup
-                        v-if="form.slack_webhook_enabled"
-                        v-model="form.slack_webhook"
-                        :error="form.errors.slack_webhook"
-                        label="Slack Webhook URL"
-                        id="slack_webhook_url"
-                        required
-                    />
-                    <div class="relative flex items-start">
-                        <div class="flex items-center h-5">
+                        <FormInputGroup
+                            v-if="form.slack_webhook_enabled"
+                            v-model="form.slack_webhook"
+                            :error="form.errors.slack_webhook"
+                            label="Slack Webhook URL"
+                            id="slack_webhook_url"
+                            required
+                        />
+                        <div class="relative flex items-start">
+                          <div class="flex items-center h-5">
                             <input
                                 :class="[
-        'text-primary-600 rounded border-gray-300 transition',
-        'focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-offset-0',
-      ]"
+          'text-primary-600 rounded border-gray-300 transition',
+          'focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-offset-0',
+        ]"
                                 id="discord_webhook_enabled"
                                 type="checkbox"
                                 v-model="form.discord_webhook_enabled" />
-                        </div>
-                        <div class="ml-3 text-sm">
+                          </div>
+                          <div class="ml-3 text-sm">
                             <label for="discord_webhook_enabled" class="font-medium text-gray-700">Call Discord Webhook</label>
+                          </div>
                         </div>
-                    </div>
-                    <FormInputGroup
-                        v-if="form.discord_webhook_enabled"
-                        v-model="form.discord_webhook"
-                        :error="form.errors.discord_webhook"
-                        label="Discord Webhook URL"
-                        id="discord_webhook_url"
-                        required
-                    />
-                    <div class="relative flex items-start">
-                        <div class="flex items-center h-5">
+                        <FormInputGroup
+                            v-if="form.discord_webhook_enabled"
+                            v-model="form.discord_webhook"
+                            :error="form.errors.discord_webhook"
+                            label="Discord Webhook URL"
+                            id="discord_webhook_url"
+                            required
+                        />
+                        <div class="relative flex items-start">
+                          <div class="flex items-center h-5">
                             <input
                                 :class="[
-        'text-primary-600 rounded border-gray-300 transition',
-        'focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-offset-0',
-      ]"
+          'text-primary-600 rounded border-gray-300 transition',
+          'focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-offset-0',
+        ]"
                                 id="custom_webhook_enabled"
                                 type="checkbox"
                                 v-model="form.custom_webhook_enabled" />
-                        </div>
-                        <div class="ml-3 text-sm">
+                          </div>
+                          <div class="ml-3 text-sm">
                             <label for="custom_webhook_enabled" class="font-medium text-gray-700">Call Custom Webhook</label>
+                          </div>
                         </div>
+                        <FormInputGroup
+                            v-if="form.custom_webhook_enabled"
+                            v-model="form.custom_webhook"
+                            :error="form.errors.custom_webhook"
+                            label="Custom Webhook URL"
+                            id="custom_webhook_url"
+                            required
+                        />
+                    </div>
+
+                    <div class="space-y-4">
+                        <label class="text-base font-medium">Issues</label>
+                        <div class="relative flex items-start">
+                          <div class="flex items-center h-5">
+                            <input
+                                :class="[
+            'text-primary-600 rounded border-gray-300 transition',
+            'focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-offset-0',
+          ]"
+                                id="issue_receive_email"
+                                type="checkbox"
+                                v-model="form.issue_receive_email" />
+                          </div>
+                          <div class="ml-3 text-sm">
+                            <label for="issue_receive_email" class="font-medium text-gray-700">Receive email notification</label>
+                          </div>
+                        </div>
+                        <div class="relative flex items-start">
+                          <div class="flex items-center h-5">
+                            <input
+                                :class="[
+            'text-primary-600 rounded border-gray-300 transition',
+            'focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-offset-0',
+          ]"
+                                id="issue_mobile_notifications_enabled"
+                                type="checkbox"
+                                v-model="form.issue_mobile_notifications_enabled" />
+                          </div>
+                          <div class="ml-3 text-sm">
+                            <label for="issue_mobile_notifications_enabled" class="font-medium text-gray-700">Receive mobile notification</label>
+                          </div>
+                        </div>
+                        <div class="relative flex items-start">
+                          <div class="flex items-center h-5">
+                            <input
+                                :class="[
+            'text-primary-600 rounded border-gray-300 transition',
+            'focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-offset-0',
+          ]"
+                                id="issue_slack_webhook_enabled"
+                                type="checkbox"
+                                v-model="form.issue_slack_webhook_enabled" />
+                          </div>
+                          <div class="ml-3 text-sm">
+                            <label for="issue_slack_webhook_enabled" class="font-medium text-gray-700">Call Slack Webhook</label>
+                          </div>
+                        </div>
+                        <FormInputGroup
+                            v-if="form.issue_slack_webhook_enabled"
+                            v-model="form.issue_slack_webhook"
+                            :error="form.errors.issue_slack_webhook"
+                            label="Slack Webhook URL"
+                            id="issue_slack_webhook_url"
+                            required
+                        />
+                        <div class="relative flex items-start">
+                          <div class="flex items-center h-5">
+                            <input
+                                :class="[
+            'text-primary-600 rounded border-gray-300 transition',
+            'focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-offset-0',
+          ]"
+                                id="issue_discord_webhook_enabled"
+                                type="checkbox"
+                                v-model="form.issue_discord_webhook_enabled" />
+                          </div>
+                          <div class="ml-3 text-sm">
+                            <label for="issue_discord_webhook_enabled" class="font-medium text-gray-700">Call Discord Webhook</label>
+                          </div>
+                        </div>
+                        <FormInputGroup
+                            v-if="form.issue_discord_webhook_enabled"
+                            v-model="form.issue_discord_webhook"
+                            :error="form.errors.issue_discord_webhook"
+                            label="Discord Webhook URL"
+                            id="issue_discord_webhook_url"
+                            required
+                        />
+                        <div class="relative flex items-start">
+                          <div class="flex items-center h-5">
+                            <input
+                                :class="[
+            'text-primary-600 rounded border-gray-300 transition',
+            'focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-offset-0',
+          ]"
+                                id="issue_custom_webhook_enabled"
+                                type="checkbox"
+                                v-model="form.issue_custom_webhook_enabled" />
+                          </div>
+                          <div class="ml-3 text-sm">
+                            <label for="issue_custom_webhook_enabled" class="font-medium text-gray-700">Call Custom Webhook</label>
+                          </div>
+                        </div>
+                        <FormInputGroup
+                            v-if="form.issue_custom_webhook_enabled"
+                            v-model="form.issue_custom_webhook"
+                            :error="form.errors.issue_custom_webhook"
+                            label="Custom Webhook URL"
+                            id="issue_custom_webhook_url"
+                            required
+                        />
                     </div>
                     <FormInputGroup
                         v-if="form.custom_webhook_enabled"
@@ -248,6 +361,15 @@ export default {
                 custom_webhook_enabled: this.project.custom_webhook_enabled,
                 notifications_enabled: this.project.notifications_enabled,
                 mobile_notifications_enabled: this.project.mobile_notifications_enabled,
+                issue_receive_email: this.project.issue_receive_email,
+                issue_slack_webhook: this.project.issue_slack_webhook,
+                issue_slack_webhook_enabled: this.project.issue_slack_webhook_enabled,
+                issue_discord_webhook: this.project.issue_discord_webhook,
+                issue_discord_webhook_enabled: this.project.issue_discord_webhook_enabled,
+                issue_custom_webhook: this.project.issue_custom_webhook,
+                issue_custom_webhook_enabled: this.project.issue_custom_webhook_enabled,
+                issue_notifications_enabled: this.project.issue_notifications_enabled,
+                issue_mobile_notifications_enabled: this.project.issue_mobile_notifications_enabled,
                 telegram_notifications_enabled: this.project.telegram_notifications_enabled,
                 telegram_chat_id: this.project.telegram_chat_id,
             }),

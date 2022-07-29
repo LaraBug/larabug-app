@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Resources\UserResource\RelationManagers\ProjectsRelationManager;
 use Filament\Resources\Form;
 use Filament\Tables\Columns;
 use Filament\Resources\Table;
@@ -18,14 +19,23 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
-                Components\TextInput::make('name')->autofocus()->required(),
-                Grid::make()
-                    ->schema([
-                        Components\Checkbox::make('is_admin'),
-                    ]),
+                Components\Card::make()->schema([
+                    Components\TextInput::make('email')
+                        ->required(),
 
-                Components\MultiSelect::make('abilities')
-                    ->options(config('auth.abilities')),
+                    Components\TextInput::make('name')
+                        ->required(),
+
+                    Grid::make()
+                        ->schema([
+                            Components\Toggle::make('is_admin')
+                                ->helperText('This option grants access to this admin panel'),
+                        ]),
+
+                    Components\MultiSelect::make('abilities')
+                        ->options(config('auth.abilities'))
+                        ->helperText('This can be used to give the user some extra features'),
+                ])->columns(),
             ]);
     }
 
@@ -45,7 +55,7 @@ class UserResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            ProjectsRelationManager::class,
         ];
     }
 

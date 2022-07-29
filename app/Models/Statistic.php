@@ -12,12 +12,12 @@ class Statistic extends Model
 
     public static function getStatistics($key = 'total_exceptions')
     {
-        return self::first([$key])->{$key};
+        return self::query()->first([$key])->{$key};
     }
 
     public static function incrementStatistics($key = 'total_exceptions')
     {
-        $stats = self::first();
+        $stats = self::query()->first();
 
         $stats->{$key} ++;
         $stats->save();
