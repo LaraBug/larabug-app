@@ -82,7 +82,6 @@ class Project extends Model
         'issue_discord_webhook_enabled' => 'boolean',
         'issue_custom_webhook_enabled' => 'boolean',
         'telegram_notifications_enabled' => 'boolean',
-        'telegram_chat_id' => 'int',
     ];
 
     protected $appends = [
