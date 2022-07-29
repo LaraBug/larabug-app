@@ -31,8 +31,12 @@ class TelegramController extends Controller
 
     public function receiveFromWebhook(Request $request, Api $telegram, InviteToken $inviteTokenUtility)
     {
+        if (in_array($request->keys()[1], ['inline_query'])) {
+            return response()->noContent();
+        }
+
         $chatId = $request['message']['chat']['id'];
-        [$command, $token] = explode(' ', $request['message']['text']);
+        [$command, $_, $token] = explode("\n", $request['message']['text']);
 
         if (! in_array($command, ['/start', '/start@'.config('services.telegram.bot_handle')])) {
             $telegram->sendMessage([
