@@ -50,5 +50,10 @@ return [
 
     'horizon' => [
         'token' => env('HORIZON_TOKEN')
-    ]
+   ],
+
+    'telegram' => [
+        'token' => env('TELEGRAM_BOT_TOKEN'),
+        'bot_handle' => env('TELEGRAM_BOT_HANDLE')
+    ],
 ];

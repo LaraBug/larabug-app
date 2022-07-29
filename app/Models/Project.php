@@ -26,6 +26,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property boolean slack_webhook_enabled
  * @property boolean discord_webhook_enabled
  * @property boolean custom_webhook_enabled
+ * @property boolean telegram_notifications_enabled
+ * @property int telegram_chat_id
  * @property string key
  * @property mixed url
  */
@@ -57,6 +59,8 @@ class Project extends Model
         'issue_slack_webhook_enabled',
         'issue_discord_webhook_enabled',
         'issue_custom_webhook_enabled',
+        'telegram_notifications_enabled',
+        'telegram_chat_id',
     ];
 
     protected $dates = [
@@ -77,6 +81,7 @@ class Project extends Model
         'issue_slack_webhook_enabled' => 'boolean',
         'issue_discord_webhook_enabled' => 'boolean',
         'issue_custom_webhook_enabled' => 'boolean',
+        'telegram_notifications_enabled' => 'boolean',
     ];
 
     protected $appends = [
@@ -192,6 +197,11 @@ class Project extends Model
             ->map(function ($fcmToken) {
                 return $fcmToken->token;
             })->toArray();
+    }
+
+    public function routeNotificationForTelegram()
+    {
+        return $this->telegram_chat_id;
     }
 
     public static function boot()

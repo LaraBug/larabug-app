@@ -69,6 +69,13 @@ class ProjectRequest extends FormRequest
             'custom_webhook_enabled' => [
                 'boolean'
             ],
+            'telegram_notifications_enabled' => [
+                'boolean'
+            ],
+            'telegram_chat_id' => [
+                'nullable',
+                'required_if:telegram_notifications_enabled,true',
+            ]
         ];
     }
 }
